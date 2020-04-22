@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/gk-blog/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/gk-blog/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/gk-blog/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/gk-blog/images/favicon-32x32-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/gk-blog/images/favicon-16x16-next.png?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/gk-blog/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/gk-blog/',
+    scheme: 'Gemini',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="學習程式以來碰到一個較難突破的關檻，就是「如何向 server 發送要求」。到目前為止常見的方法有三種：  用 jQuery 實現 用 fetch 實現 用 axios 實現">
+<meta name="keywords" content="JavaScript,XMLHttpRequest">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript 學習筆記 - XMLHttpRequest">
+<meta property="og:url" content="https://gkfat.github.io/gk-blog/2019/09/12/JS-XMLHttpRequest/index.html">
+<meta property="og:site_name" content="Gk&#39;s blog">
+<meta property="og:description" content="學習程式以來碰到一個較難突破的關檻，就是「如何向 server 發送要求」。到目前為止常見的方法有三種：  用 jQuery 實現 用 fetch 實現 用 axios 實現">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-10-03T06:54:31.344Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript 學習筆記 - XMLHttpRequest">
+<meta name="twitter:description" content="學習程式以來碰到一個較難突破的關檻，就是「如何向 server 發送要求」。到目前為止常見的方法有三種：  用 jQuery 實現 用 fetch 實現 用 axios 實現">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://gkfat.github.io/gk-blog/2019/09/12/JS-XMLHttpRequest/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>JavaScript 學習筆記 - XMLHttpRequest | Gk's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/gk-blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Gk's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">在程式路上舉步維艱。</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/gk-blog/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/gk-blog/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gkfat.github.io/gk-blog/gk-blog/2019/09/12/JS-XMLHttpRequest/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gk">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/gk-blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gk's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JavaScript 學習筆記 - XMLHttpRequest
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-09-12 15:32:11" itemprop="dateCreated datePublished" datetime="2019-09-12T15:32:11+08:00">2019-09-12</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-10-03 14:54:31" itemprop="dateModified" datetime="2019-10-03T14:54:31+08:00">2019-10-03</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>學習程式以來碰到一個較難突破的關檻，就是「如何向 server 發送要求」。到目前為止常見的方法有三種：</p>
+<ul>
+<li>用 jQuery 實現</li>
+<li>用 fetch 實現</li>
+<li>用 axios 實現<a id="more"></a>
+但我的想法是想先了解背後的運作原理，以及用原生 JS 如何實現，之後再去使用方便快速的方法。</li>
+</ul>
+<p>很多免費資源都可以在 YouTube 上搜尋到，例如這一個頻道： <a href="https://www.youtube.com/user/TechGuyWeb" target="_blank" rel="noopener">Traversy Media</a>，他在這支影片裡就帶著你用原生 JS 操作 XMLHttpRequest：<a href="https://www.youtube.com/watch?v=82hnvUYY6QA" target="_blank" rel="noopener">影片</a></p>
+<hr>
+<h2 id="XMLHttpRequest"><a href="#XMLHttpRequest" class="headerlink" title="XMLHttpRequest"></a><em>XMLHttpRequest</em></h2><p>在了解如何操作之前，我想知道的是：<br><strong>「什麼是 XMLHttpRequest？它是為了什麼目的而存在的？」</strong></p>
+<p>找了一些資料來看之後，這是定義：</p>
+<blockquote>
+<p><strong>XMLHttp 是一組能被 web 瀏覽器內嵌的 script 語言呼叫的 API，通過 Http 在瀏覽器和 web 伺服器之間收發 XML 或其它資料。其最大的好處在於可以動態地更新網頁內容。</strong></p>
+</blockquote>
+<p>向伺服器發送一個 request，回傳資料後動態地更新網頁內容，對使用者而言，不用一直重複載入整個頁面，當然比較符合使用者體驗。</p>
+<p>同時，XMLHttpRequest 也是實現 AJAX 重要的一環，在使用 asyncronous（非同步）技術來要求資料後動態更新網頁內容，讓使用者不須等待資料全部載完，就能夠先瀏覽網頁的其他內容，UX 因此更上一層。</p>
+<p>但對現今的前端而言，AJAX 已經是必備技術，這也是我覺得必須盡快熟悉的原因。</p>
+<hr>
+<h2 id="XMLHttpRequest-的屬性"><a href="#XMLHttpRequest-的屬性" class="headerlink" title="XMLHttpRequest 的屬性"></a><em>XMLHttpRequest 的屬性</em></h2><ul>
+<li><p><code>XMLHttpRequest.onreadystatechange</code><br>在 <code>readyState</code> 屬性之狀態改變時被呼叫，可用於監聽 request 請求狀態的改變。</p>
+</li>
+<li><p><code>XMLHttpRequest.readyState</code><br>回傳一個 0~4 之間的整數值，每個值代表的意義如下：</p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>狀態</th>
+<th>意義</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td><code>UNSENT</code></td>
+<td>客戶端已建立</td>
+</tr>
+<tr>
+<td>1</td>
+<td><code>OPENED</code></td>
+<td><code>open()</code> 方法已被呼叫</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>HEADERS_RECEIVED</code></td>
+<td><code>send()</code> 方法已被呼叫，且可取得 header 與狀態</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>LOADING</code></td>
+<td>回應資料下載中，此時 responseText 會擁有部分資料</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>DONE</code></td>
+<td>完成下載</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>本表格節自 <a href="https://developer.mozilla.org/zh-TW/docs/Web/API/XMLHttpRequest/readyState" target="_blank" rel="noopener">MDN：XMLHttpRequest.readyState</a></p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li><p><code>XMLHttpRequest.status</code><br>依據狀態不同，回傳介於 100~500 間的 HTTP status code，分別代表不同意義，例如代表成功回應的 <code>200 OK</code> 或廣為人知的錯誤 <code>404 Not Found</code>。</p>
+<blockquote>
+<p>更多狀態代碼請參照 <a href="https://developer.mozilla.org/zh-TW/docs/Web/HTTP/Status" target="_blank" rel="noopener">MDN：HTTP status code</a></p>
+</blockquote>
+</li>
+<li><p><code>XMLHttpRequest.responseText</code><br>回傳一個 DOMString，其內容為請求之回應的文字內容。如請求失敗或尚未發送，則為 null。若確定 responseText 為 JSON 格式，通常會接著做 <code>JSON.parse()</code> 並接著處理資料。</p>
+</li>
+</ul>
+<hr>
+<h2 id="如何發送-XMLHttpRequest"><a href="#如何發送-XMLHttpRequest" class="headerlink" title="如何發送 XMLHttpRequest"></a><em>如何發送 XMLHttpRequest</em></h2><p>假設要發送一個簡單的 XMLHttpRequest 向伺服器要求資料，需要做到以下幾點來確保能夠成功返回資料。</p>
+<ul>
+<li>建立一個 XMLHttpRequest</li>
+<li>定義請求的方法（<code>GET</code> <code>POST</code> <code>PUT</code> <code>DELETE</code>…）</li>
+<li>定義監聽流程</li>
+<li>送出請求</li>
+</ul>
+<p>用範例表示的話就是：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> myFunction = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//創建 XMLHttpRequest</span></span><br><span class="line">    <span class="keyword">let</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//定義送出要求的網址</span></span><br><span class="line">    <span class="keyword">let</span> url = <span class="string">'&lt;你想送出要求的網址&gt;'</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//定義請求的方法</span></span><br><span class="line">    xhr.open(<span class="string">'GET'</span>, url, <span class="literal">true</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//定義監聽流程（當 status 改變時呼叫）</span></span><br><span class="line">    xhr.onreadyStatusChange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    </span><br><span class="line">        <span class="comment">//顯示當前進度</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'readyState'</span>, xhr.readyState, <span class="string">'status'</span>, xhr.status)</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//確定請求成功時執行以下動作</span></span><br><span class="line">        <span class="keyword">if</span> ( xhr.status === <span class="number">4</span> &amp;&amp; xhr.readyState === <span class="number">200</span> ) &#123;</span><br><span class="line">            <span class="comment">//你想對回傳資料做些什麼？</span></span><br><span class="line">            <span class="built_in">console</span>.log(responseText);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//送出請求</span></span><br><span class="line">    xhr.send();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上就是我目前了解到的發送 XMLHttpRequest 流程，以及每一步的意義。當然請求方法不只一種，XMLHttpRequest 也不會這麼單純，還有更多的細節需要處理。不過這部分就留待之後遇到再來研究如何解決吧。</p>
+<hr>
+<h4 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h4><ul>
+<li><a href="https://zh.wikipedia.org/wiki/XMLHttpRequest" target="_blank" rel="noopener">維基百科：XMLHttpRequest</a></li>
+<li><a href="https://developer.mozilla.org/zh-TW/docs/Web/API/XMLHttpRequest" target="_blank" rel="noopener">MDN：XMLHttpRequest</a></li>
+<li><a href="https://developer.mozilla.org/zh-TW/docs/Web/API/XMLHttpRequest/readyState" target="_blank" rel="noopener">MDN：XMLHttpRequest.readyState</a></li>
+<li><a href="https://developer.mozilla.org/zh-TW/docs/Web/HTTP/Status" target="_blank" rel="noopener">MDN：HTTP status code</a></li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/gk-blog/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+            <a href="/gk-blog/tags/XMLHttpRequest/" rel="tag"># XMLHttpRequest</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/gk-blog/2019/09/06/html-html5/" rel="next" title="HTML 學習筆記 - HTML vs HTML5">
+                <i class="fa fa-chevron-left"></i> HTML 學習筆記 - HTML vs HTML5
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/gk-blog/2019/09/12/JS-ES5-ES6/" rel="prev" title="JavaScript 學習筆記 - ES5 vs ES6">
+                JavaScript 學習筆記 - ES5 vs ES6 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Gk</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/gk-blog/archives/">
+                
+                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">26</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/gkfat" title="GitHub &rarr; https://github.com/gkfat" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:gkgkdesign@gmail.com" title="E-Mail &rarr; mailto:gkgkdesign@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#XMLHttpRequest"><span class="nav-number">1.</span> <span class="nav-text">XMLHttpRequest</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XMLHttpRequest-的屬性"><span class="nav-number">2.</span> <span class="nav-text">XMLHttpRequest 的屬性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何發送-XMLHttpRequest"><span class="nav-number">3.</span> <span class="nav-text">如何發送 XMLHttpRequest</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#參考資料"><span class="nav-number">3.0.1.</span> <span class="nav-text">參考資料</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gk</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.2</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/gk-blog/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/gk-blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/gk-blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/gk-blog/js/utils.js?v=7.1.2"></script>
+
+  <script src="/gk-blog/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/gk-blog/js/affix.js?v=7.1.2"></script>
+
+  <script src="/gk-blog/js/schemes/pisces.js?v=7.1.2"></script>
+
+
+
+
+  
+  <script src="/gk-blog/js/scrollspy.js?v=7.1.2"></script>
+<script src="/gk-blog/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/gk-blog/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

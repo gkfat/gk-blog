@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/gk-blog/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/gk-blog/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/gk-blog/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/gk-blog/images/favicon-32x32-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/gk-blog/images/favicon-16x16-next.png?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/gk-blog/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/gk-blog/',
+    scheme: 'Gemini',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="從頭開始學習 Vue.js，這真的是個很方便的東西。因為是記錄給自己看的，比較不會太詳細或有系統，也不知道會有幾篇XD。如果你想更進一步學習 Vue，建議你上網找課程，或閱讀 Vue 的官方文件。">
+<meta name="keywords" content="vue.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue.js 學習筆記（一）">
+<meta property="og:url" content="https://gkfat.github.io/gk-blog/2019/06/26/vue-note-1/index.html">
+<meta property="og:site_name" content="Gk&#39;s blog">
+<meta property="og:description" content="從頭開始學習 Vue.js，這真的是個很方便的東西。因為是記錄給自己看的，比較不會太詳細或有系統，也不知道會有幾篇XD。如果你想更進一步學習 Vue，建議你上網找課程，或閱讀 Vue 的官方文件。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-10-03T06:56:25.842Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vue.js 學習筆記（一）">
+<meta name="twitter:description" content="從頭開始學習 Vue.js，這真的是個很方便的東西。因為是記錄給自己看的，比較不會太詳細或有系統，也不知道會有幾篇XD。如果你想更進一步學習 Vue，建議你上網找課程，或閱讀 Vue 的官方文件。">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://gkfat.github.io/gk-blog/2019/06/26/vue-note-1/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Vue.js 學習筆記（一） | Gk's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/gk-blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Gk's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">在程式路上舉步維艱。</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/gk-blog/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/gk-blog/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gkfat.github.io/gk-blog/gk-blog/2019/06/26/vue-note-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gk">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/gk-blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gk's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Vue.js 學習筆記（一）
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-06-26 21:24:41" itemprop="dateCreated datePublished" datetime="2019-06-26T21:24:41+08:00">2019-06-26</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-10-03 14:56:25" itemprop="dateModified" datetime="2019-10-03T14:56:25+08:00">2019-10-03</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>從頭開始學習 Vue.js，這真的是個很方便的東西。因為是記錄給自己看的，比較不會太詳細或有系統，也不知道會有幾篇XD。如果你想更進一步學習 Vue，建議你上網找課程，或閱讀 Vue 的官方文件。</p>
+<a id="more"></a>
+
+<h2 id="導入-Vue-js-的方法"><a href="#導入-Vue-js-的方法" class="headerlink" title="導入 Vue.js 的方法"></a><em>導入 Vue.js 的方法</em></h2><p>在 <code>&lt;head&gt;&lt;/head&gt;</code> 內新增下列這一行程式碼，即可透過 CDN 引入 Vue.js。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"https://cdn.jsdelivr.net/npm/vue"</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>至於如何透過 <code>npm</code> 來安裝，以及官方所謂的腳手架工具，目前還不是很了解。</p>
+<hr>
+<h2 id="Vue-的基本環境創建"><a href="#Vue-的基本環境創建" class="headerlink" title="Vue 的基本環境創建"></a><em>Vue 的基本環境創建</em></h2><p>需先在 <code>&lt;html&gt;</code> 內創建一個掛載點，簡單的寫法如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div id=<span class="string">"app"</span>&gt;&lt;/div&gt;</span><br><span class="line">&lt;<span class="regexp">/body&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>這個 <code>&lt;div&gt;</code> 就是 Vue 透過 id 抓到的的掛載點（也可以透過 class 來綁定，但沒辦法用同個 class 建立兩個 Vue，只會出現一個），接下來在<code>&lt;script&gt;&lt;/script&gt;</code> 內新增一個 Vue 如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">      el: <span class="string">"#app"</span>  <span class="comment">//透過id抓取此掛載點</span></span><br><span class="line">      <span class="comment">//此處撰寫 Vue</span></span><br><span class="line">    &#125;);</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>這樣一個基本的 Vue 環境就建置完成了。</p>
+<p>另外補充一個點，在 <code>Vue();</code> 的內部，是用物件來撰寫資料的，這也是為什麼會需要用大括號包起來。</p>
+<hr>
+<h2 id="Vue-基本功能"><a href="#Vue-基本功能" class="headerlink" title="Vue 基本功能"></a><em>Vue 基本功能</em></h2><h3 id="一、條件判定渲染"><a href="#一、條件判定渲染" class="headerlink" title="一、條件判定渲染"></a>一、條件判定渲染</h3><p><code>v-if</code> <code>v-else-if</code> <code>v-else</code> 使用條件來判定是否要渲染內容。若只依單一情況判定是否渲染，那可以用 <code>v-show</code> 就好。</p>
+<p>可以單獨使用如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p v-<span class="keyword">if</span>=<span class="string">"isAwake"</span>&gt;我醒著&lt;<span class="regexp">/p&gt;  /</span><span class="regexp">/isAwake=true 則渲染這塊內容</span></span><br></pre></td></tr></table></figure>
+
+<p>也可以搭配使用如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;p v-<span class="keyword">if</span>=<span class="string">"isAwake"</span>&gt;我醒著&lt;<span class="regexp">/p&gt;  /</span><span class="regexp">/isAwake=true 則渲染這塊內容</span></span><br><span class="line"><span class="regexp">&lt;p v-else&gt;我睡死了&lt;/</span>p&gt; <span class="comment">//isAwake=false 則渲染這塊內容</span></span><br></pre></td></tr></table></figure>
+
+<p>三者同時混用如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;p v-<span class="keyword">if</span>=<span class="string">"num===1"</span>&gt;This is <span class="number">1</span>&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">&lt;p v-else-if="num===2"&gt;This is 2&lt;/</span>p&gt;</span><br><span class="line">&lt;p v-<span class="keyword">else</span>-<span class="keyword">if</span>=<span class="string">"num===3"</span>&gt;This is <span class="number">3</span>&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">&lt;p v-else&gt;This is not 1/</span><span class="number">2</span>/<span class="number">3</span>&lt;<span class="regexp">/p&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="二、列表渲染"><a href="#二、列表渲染" class="headerlink" title="二、列表渲染"></a>二、列表渲染</h3><p><code>v-for</code> 可以達到節省重複撰寫 <code>&lt;li&gt;</code> 的效果。</p>
+<p>舉例 <code>&lt;html&gt;</code> 中要重複渲染的區塊如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul id=<span class="string">"app1"</span>&gt;</span><br><span class="line">  &lt;li v-<span class="keyword">for</span>=<span class="string">"item in items"</span>&gt;  <span class="comment">//或 item of items</span></span><br><span class="line">    &#123;&#123; item.content &#125;&#125;</span><br><span class="line">  &lt;<span class="regexp">/li&gt;</span></span><br><span class="line"><span class="regexp">&lt;/u</span>l&gt;</span><br></pre></td></tr></table></figure>
+
+<p>在 <code>Vue</code> 的 <code>data.items</code> 中列出所有內容，就可以做到重複渲染，如此一來相當方便管理。</p>
+<h3 id="三、事件監聽"><a href="#三、事件監聽" class="headerlink" title="三、事件監聽"></a>三、事件監聽</h3><p><code>v-on</code> 可以方便地監聽 DOM 的各種事件，<code>v-on</code> 亦可以用 <code>@</code> 取代。簡單舉例如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;button v-on:click=<span class="string">"myFunction"</span>&gt;按鈕&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">&lt;button @click="myFunction"&gt;按鈕&lt;/</span>button&gt;  <span class="comment">//偷懶的縮寫</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="四、屬性綁定"><a href="#四、屬性綁定" class="headerlink" title="四、屬性綁定"></a>四、屬性綁定</h3><p><code>v-bind</code> 將 DOM 元素綁定一個 class。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;div v-bind:<span class="class"><span class="keyword">class</span></span>=<span class="string">"myClass"</span>&gt;&lt;/div&gt;</span><br><span class="line">&lt;div :<span class="class"><span class="keyword">class</span></span>=<span class="string">"myClass"</span>&gt;&lt;/div&gt;  <span class="comment">//偷懶的縮寫</span></span><br></pre></td></tr></table></figure>
+
+<p>或綁定 src，讓你能更動態地改變這個 DOM 元素的來源。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;img v-bind:src=<span class="string">"imageSrc"</span> /&gt;</span><br><span class="line">&lt;img :src=<span class="string">"imageSrc"</span> /&gt;  <span class="comment">//偷懶的縮寫</span></span><br></pre></td></tr></table></figure>
+
+<p>屬性綁定還能夠更方便地操作 DOM，之後再來探討。</p>
+<h3 id="五、修飾符"><a href="#五、修飾符" class="headerlink" title="五、修飾符"></a>五、修飾符</h3><p>Vue 的修飾符分為兩種：</p>
+<ul>
+<li>事件修飾符</li>
+<li>按鍵修飾符</li>
+</ul>
+<p>接下來就簡短記錄一下。</p>
+<h4 id="（一）-事件修飾符"><a href="#（一）-事件修飾符" class="headerlink" title="（一） 事件修飾符"></a>（一） 事件修飾符</h4><p>有時為了預防假按鈕 <code>&lt;a&gt;</code> 點擊事件時，觸發到 <code>&lt;href=&quot;#&quot;&gt;</code> 的跳轉或冒泡，我們會使用 <code>preventDefault()</code> <code>stopPropagation()</code> 來處理。在 Vue 中其實也差不多意思。</p>
+<ul>
+<li><code>.stop</code></li>
+<li><code>.prevent</code></li>
+<li><code>.capture</code></li>
+<li><code>.self</code></li>
+<li><code>.once</code></li>
+<li><code>.passive</code></li>
+</ul>
+<p>隨便舉個例子，可以這樣寫：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=<span class="string">"#"</span> v-on:click.stop=<span class="string">"myFunction"</span>&gt;假按鈕&lt;<span class="regexp">/a&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="（二）-按鍵修飾符"><a href="#（二）-按鍵修飾符" class="headerlink" title="（二） 按鍵修飾符"></a>（二） 按鍵修飾符</h4><p>我們常為了監聽按鍵的行為而寫下許多 <code>addEventListener</code>，按鍵修飾符可以說就是簡化這件事的幫手。而且 Vue 還貼心地將按鍵對應的 keycode 轉變成直覺式的命名：</p>
+<ul>
+<li><code>.enter</code></li>
+<li><code>.tab</code></li>
+<li><code>.delete</code></li>
+<li><code>.esc</code></li>
+<li><code>.space</code></li>
+<li><code>.up</code></li>
+<li><code>.down</code></li>
+<li><code>.left</code></li>
+<li><code>.right</code></li>
+</ul>
+<p>舉個例子，這樣用：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input v-on:keyup.enter=<span class="string">"submit"</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Vue 真的是很方便呢！</p>
+<hr>
+<h2 id="Vue-觀念"><a href="#Vue-觀念" class="headerlink" title="Vue 觀念"></a><em>Vue 觀念</em></h2><h3 id="綁定的觀念"><a href="#綁定的觀念" class="headerlink" title="綁定的觀念"></a>綁定的觀念</h3><p>在 Vue 中很重要的一個觀念就是綁定。透過綁定，讓 DOM 的操作變得容易。</p>
+<p>而透過 <code>v-model</code> 的雙向綁定，讓使用者輸入的內容，能夠同步修改 Vue 中的數據，如此一來能應用的範圍就很廣了。</p>
+<p>舉個例子，我有下列這段 <code>&lt;html&gt;</code>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">    勇者名稱： &#123;&#123; name &#125;&#125;</span><br><span class="line">    &lt;input type=<span class="string">"text"</span> v-model=<span class="string">"message"</span> /&gt;</span><br><span class="line">    &lt;button v-on:click=<span class="string">"enterName"</span>&gt;點我來輸入勇者名稱&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>在這個範例中，我希望使用者在 <code>&lt;input&gt;</code> 中輸入名稱，並點擊按鈕後，觸發 <code>enterName()</code> 將名稱傳入 <code>message</code>。如果是用純 js，我需要創建一個新的 <code>html</code> 標籤，並抓取 <code>&lt;input&gt;</code> 的 value 傳入，這期間又會需要做一些宣告變數來抓取各個標籤的動作，相當繁瑣。但在 Vue 中我只需要這樣寫：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">"#app"</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        message: <span class="string">"請輸入勇者姓名"</span>, <span class="comment">//直接當作 input placeholder</span></span><br><span class="line">        name: <span class="string">""</span>  <span class="comment">//宣告空的 name</span></span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        enterName: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="comment">//直接將 messgae 傳入 name</span></span><br><span class="line">            <span class="keyword">this</span>.name = <span class="keyword">this</span>.message;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>就完成了！非常方便。這就是 Vue 偉大的綁定概念。</p>
+<hr>
+<h2 id="需進一步了解的部分"><a href="#需進一步了解的部分" class="headerlink" title="需進一步了解的部分"></a>需進一步了解的部分</h2><ul>
+<li>App.vue：template + script + style</li>
+<li>component</li>
+<li>Vue 腳手架</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/gk-blog/tags/vue-js/" rel="tag"># vue.js</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/gk-blog/2019/06/25/myblog-with-hexo/" rel="next" title="使用 Hexo + Github 來架設個人部落格">
+                <i class="fa fa-chevron-left"></i> 使用 Hexo + Github 來架設個人部落格
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/gk-blog/2019/09/06/html-html5/" rel="prev" title="HTML 學習筆記 - HTML vs HTML5">
+                HTML 學習筆記 - HTML vs HTML5 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Gk</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/gk-blog/archives/">
+                
+                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">26</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/gkfat" title="GitHub &rarr; https://github.com/gkfat" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:gkgkdesign@gmail.com" title="E-Mail &rarr; mailto:gkgkdesign@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#導入-Vue-js-的方法"><span class="nav-number">1.</span> <span class="nav-text">導入 Vue.js 的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue-的基本環境創建"><span class="nav-number">2.</span> <span class="nav-text">Vue 的基本環境創建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue-基本功能"><span class="nav-number">3.</span> <span class="nav-text">Vue 基本功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、條件判定渲染"><span class="nav-number">3.1.</span> <span class="nav-text">一、條件判定渲染</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、列表渲染"><span class="nav-number">3.2.</span> <span class="nav-text">二、列表渲染</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、事件監聽"><span class="nav-number">3.3.</span> <span class="nav-text">三、事件監聽</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、屬性綁定"><span class="nav-number">3.4.</span> <span class="nav-text">四、屬性綁定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、修飾符"><span class="nav-number">3.5.</span> <span class="nav-text">五、修飾符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（一）-事件修飾符"><span class="nav-number">3.5.1.</span> <span class="nav-text">（一） 事件修飾符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（二）-按鍵修飾符"><span class="nav-number">3.5.2.</span> <span class="nav-text">（二） 按鍵修飾符</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue-觀念"><span class="nav-number">4.</span> <span class="nav-text">Vue 觀念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#綁定的觀念"><span class="nav-number">4.1.</span> <span class="nav-text">綁定的觀念</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#需進一步了解的部分"><span class="nav-number">5.</span> <span class="nav-text">需進一步了解的部分</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gk</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.2</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/gk-blog/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/gk-blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/gk-blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/gk-blog/js/utils.js?v=7.1.2"></script>
+
+  <script src="/gk-blog/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/gk-blog/js/affix.js?v=7.1.2"></script>
+
+  <script src="/gk-blog/js/schemes/pisces.js?v=7.1.2"></script>
+
+
+
+
+  
+  <script src="/gk-blog/js/scrollspy.js?v=7.1.2"></script>
+<script src="/gk-blog/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/gk-blog/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

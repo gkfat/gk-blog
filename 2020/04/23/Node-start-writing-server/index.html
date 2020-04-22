@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/gk-blog/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/gk-blog/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/gk-blog/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/gk-blog/images/favicon-32x32-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/gk-blog/images/favicon-16x16-next.png?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/gk-blog/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/gk-blog/',
+    scheme: 'Gemini',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="初次接觸 Node.js 後，我開始對如何撰寫伺服器的服務感到有興趣，因此繼續學習。這次要來紀錄的就是如何開始撰寫一個 Server 服務。">
+<meta name="keywords" content="Node.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Node.js 學習筆記 - 試著開始寫 Server">
+<meta property="og:url" content="https://gkfat.github.io/gk-blog/2020/04/23/Node-start-writing-server/index.html">
+<meta property="og:site_name" content="Gk&#39;s blog">
+<meta property="og:description" content="初次接觸 Node.js 後，我開始對如何撰寫伺服器的服務感到有興趣，因此繼續學習。這次要來紀錄的就是如何開始撰寫一個 Server 服務。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-04-22T23:25:43.507Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Node.js 學習筆記 - 試著開始寫 Server">
+<meta name="twitter:description" content="初次接觸 Node.js 後，我開始對如何撰寫伺服器的服務感到有興趣，因此繼續學習。這次要來紀錄的就是如何開始撰寫一個 Server 服務。">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://gkfat.github.io/gk-blog/2020/04/23/Node-start-writing-server/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Node.js 學習筆記 - 試著開始寫 Server | Gk's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/gk-blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Gk's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">在程式路上舉步維艱。</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/gk-blog/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/gk-blog/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gkfat.github.io/gk-blog/gk-blog/2020/04/23/Node-start-writing-server/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gk">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/gk-blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gk's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Node.js 學習筆記 - 試著開始寫 Server
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2020-04-23 07:23:15 / Modified: 07:25:43" itemprop="dateCreated datePublished" datetime="2020-04-23T07:23:15+08:00">2020-04-23</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>初次接觸 <code>Node.js</code> 後，我開始對如何撰寫伺服器的服務感到有興趣，因此繼續學習。這次要來紀錄的就是如何開始撰寫一個 Server 服務。</p>
+<a id="more"></a>
+
+<hr>
+<h2 id="先看看原生的作法"><a href="#先看看原生的作法" class="headerlink" title="先看看原生的作法"></a>先看看原生的作法</h2><p>是的，我就是一個喜歡原生的人，直到現在還是不會 <code>jQuery</code>，一切都用原生硬幹出來（沒有啦，後來還是直接進框架）！</p>
+<h3 id="使用-Nodemon-讓開發更順暢"><a href="#使用-Nodemon-讓開發更順暢" class="headerlink" title="使用 Nodemon 讓開發更順暢"></a>使用 <code>Nodemon</code> 讓開發更順暢</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 使用 Nodemon 來啟動專案</span><br><span class="line">$ nodemon app.js</span><br></pre></td></tr></table></figure>
+
+<p>之後，每次更新 <code>Node.js</code> 檔案，<code>Nodemon</code> 就會自動重做這個動作：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 停止 app.js</span><br><span class="line">// 啟動 app.js</span><br></pre></td></tr></table></figure>
+
+<p>就不用再自己手動停止又開起來了，很方便對吧！</p>
+<h3 id="使用-http-來建構伺服器"><a href="#使用-http-來建構伺服器" class="headerlink" title="使用 http 來建構伺服器"></a>使用 <code>http</code> 來建構伺服器</h3><p>要創建一個伺服器的話，原生 <code>Node.js</code> 我們會這樣寫：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 先宣告一個變數，引用 http pacakge</span></span><br><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 再宣告一個變數，並使用 http 的 createServer 方法</span></span><br><span class="line"><span class="keyword">const</span> server = http.createServer(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    res.end(<span class="string">"Hello from node server!"</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 然後指定這個 server 監聽 3000 port</span></span><br><span class="line">server.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+
+<p>只要 <code>$ nodemon app.js</code>，再打開瀏覽器在網址列輸入 <code>localhost:3000</code>，網頁上就會出現 <code>app.js</code> 吐出來的回傳值，也就是 <code>Hello from node server!</code> 了！</p>
+<hr>
+<h2 id="有個很方便的框架，叫做-Express"><a href="#有個很方便的框架，叫做-Express" class="headerlink" title="有個很方便的框架，叫做 Express"></a>有個很方便的框架，叫做 <code>Express</code></h2><p><code>Express</code> 是 <code>Node.js</code> 的框架。雖然我很喜歡寫原生，但那是為了瞭解運作原理。在開發時還是有框架輔助比較有效率。</p>
+<p>使用前需要先安裝 <code>Express</code>，首先在終端機輸入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install express</span><br></pre></td></tr></table></figure>
+
+<p>安裝好後，<code>app.js</code> 就可以改成以下這樣：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 先宣告一個變數，引用 express</span></span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 再宣告一個變數，創建 express 實例</span></span><br><span class="line"><span class="keyword">const</span> server = express();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 給予 server 任務</span></span><br><span class="line">server.get(<span class="string">'/'</span>, (req, res) =&gt; &#123;</span><br><span class="line">    res.send(<span class="string">"Hello from express server!"</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 然後指定這個 server 監聽 3000 port</span></span><br><span class="line">server.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+
+<p>這樣就完成使用 <code>Express</code> 來創建一個簡單的 server 了！</p>
+<p><code>Express</code> 當然不只這樣，它有非常多非常簡單好用的模組，就讓我邊學邊慢慢紀錄吧！</p>
+<hr>
+<h2 id="模組化"><a href="#模組化" class="headerlink" title="模組化"></a>模組化</h2><p>我們在給予路由任務的時候是這樣寫的：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">server.get(<span class="string">'/'</span>, (req, res) =&gt; &#123;</span><br><span class="line">    <span class="comment">// 做一些事</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>那個「做一些事」的部分，就是存取 “/“ 這個路由的時候對應的處理，但要是有很多內容要執行的話，這份檔案就會變得落落長！不僅閱讀不易，維護更有問題。誰都不喜歡太長的程式碼（<del>但是我常常寫</del>）。</p>
+<p>所以我們要善用 <code>JavaScript</code> 的 <code>Module</code> 概念，把檔案拆分開來：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* routes/get.js */</span></span><br><span class="line"><span class="keyword">const</span> myGetFunc = <span class="function">(<span class="params">res, req</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 很模組化地做一些事</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    myGetFunc</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* app.js */</span></span><br><span class="line"><span class="keyword">const</span> &#123; myGetFunc &#125; = <span class="built_in">require</span>(<span class="string">'./routes/get'</span>);</span><br><span class="line">server.get(<span class="string">'/'</span>, myGetFunc);</span><br></pre></td></tr></table></figure>
+
+<p>這樣，就能夠讓程式碼更簡潔了！</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/gk-blog/tags/Node-js/" rel="tag"># Node.js</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/gk-blog/2020/04/19/linux-systemctl/" rel="next" title="Linux 學習筆記 - Systemd">
+                <i class="fa fa-chevron-left"></i> Linux 學習筆記 - Systemd
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Gk</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/gk-blog/archives/">
+                
+                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">26</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/gkfat" title="GitHub &rarr; https://github.com/gkfat" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:gkgkdesign@gmail.com" title="E-Mail &rarr; mailto:gkgkdesign@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#先看看原生的作法"><span class="nav-number">1.</span> <span class="nav-text">先看看原生的作法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-Nodemon-讓開發更順暢"><span class="nav-number">1.1.</span> <span class="nav-text">使用 Nodemon 讓開發更順暢</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-http-來建構伺服器"><span class="nav-number">1.2.</span> <span class="nav-text">使用 http 來建構伺服器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有個很方便的框架，叫做-Express"><span class="nav-number">2.</span> <span class="nav-text">有個很方便的框架，叫做 Express</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模組化"><span class="nav-number">3.</span> <span class="nav-text">模組化</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gk</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.2</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/gk-blog/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/gk-blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/gk-blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/gk-blog/js/utils.js?v=7.1.2"></script>
+
+  <script src="/gk-blog/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/gk-blog/js/affix.js?v=7.1.2"></script>
+
+  <script src="/gk-blog/js/schemes/pisces.js?v=7.1.2"></script>
+
+
+
+
+  
+  <script src="/gk-blog/js/scrollspy.js?v=7.1.2"></script>
+<script src="/gk-blog/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/gk-blog/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

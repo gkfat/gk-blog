@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/gk-blog/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/gk-blog/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/gk-blog/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/gk-blog/images/favicon-32x32-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/gk-blog/images/favicon-16x16-next.png?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/gk-blog/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/gk-blog/',
+    scheme: 'Gemini',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="為了深入學習 JavaScript，不能單單只是會使用 Ajax ，而應進一步探討 Asyncronous JavaScript And XML（不過大多數的 XML 都已被 JSON 取代）。">
+<meta name="keywords" content="JavaScript,Ajax">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript 學習筆記 - AJAX">
+<meta property="og:url" content="https://gkfat.github.io/gk-blog/2019/10/04/JS-Ajax/index.html">
+<meta property="og:site_name" content="Gk&#39;s blog">
+<meta property="og:description" content="為了深入學習 JavaScript，不能單單只是會使用 Ajax ，而應進一步探討 Asyncronous JavaScript And XML（不過大多數的 XML 都已被 JSON 取代）。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-10-04T06:48:45.128Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript 學習筆記 - AJAX">
+<meta name="twitter:description" content="為了深入學習 JavaScript，不能單單只是會使用 Ajax ，而應進一步探討 Asyncronous JavaScript And XML（不過大多數的 XML 都已被 JSON 取代）。">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://gkfat.github.io/gk-blog/2019/10/04/JS-Ajax/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>JavaScript 學習筆記 - AJAX | Gk's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/gk-blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Gk's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">在程式路上舉步維艱。</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/gk-blog/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/gk-blog/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gkfat.github.io/gk-blog/gk-blog/2019/10/04/JS-Ajax/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gk">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/gk-blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gk's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JavaScript 學習筆記 - AJAX
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-10-04 14:47:53 / Modified: 14:48:45" itemprop="dateCreated datePublished" datetime="2019-10-04T14:47:53+08:00">2019-10-04</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>為了深入學習 <code>JavaScript</code>，不能單單只是會使用 <code>Ajax</code> ，而應進一步探討 <code>Asyncronous JavaScript And XML</code>（不過大多數的 <code>XML</code> 都已被 <code>JSON</code> 取代）。</p>
+<a id="more"></a>
+
+<hr>
+<h2 id="首先看懂-Ajax-是什麼"><a href="#首先看懂-Ajax-是什麼" class="headerlink" title="首先看懂 Ajax 是什麼"></a>首先看懂 <code>Ajax</code> 是什麼</h2><p><code>Ajax</code>：<code>Asyncronous JavaScript And XML</code></p>
+<h4 id="Ajax-定義"><a href="#Ajax-定義" class="headerlink" title="Ajax 定義"></a><code>Ajax</code> 定義</h4><p>結論放前面，<code>Ajax</code> 就是：</p>
+<blockquote>
+<p>向 server 發送請求之後，可以不需等待結果，就先進行其他的任務。等 server 回傳結果，再行處理。</p>
+</blockquote>
+<h4 id="為什麼需要-Ajax？"><a href="#為什麼需要-Ajax？" class="headerlink" title="為什麼需要 Ajax？"></a>為什麼需要 <code>Ajax</code>？</h4><p>稍微了解 <code>JavaScript</code> 的人都明白，瀏覽器在讀取 JS 檔案時是一行接著一行讀取的，當一行程式碼還沒處理完畢，就不會去動下一行，也因此一行卡住了，所有人都會等它，這就是同步處理。</p>
+<p>反之，你不確定這串程式碼會花多久時間，或你已經知道這會需要一段時間來處理，不想要網頁因為等待這串程式碼而卡住，就叫瀏覽器跳過去，先解讀其他程式碼，這就叫異步處理。</p>
+<p><code>Ajax</code> 就是為了完成異步處理（<code>Asyncronous</code>）而出現的手段。因為要呼叫 server 再得到回傳資料，你實在無法確定這會花多少時間，所以乾脆讓它在背景處理好之後再渲染到 DOM。</p>
+<p>延伸應用，這也能夠提升使用者體驗。舉例來說，當使用者做了某個動作，網頁上的某部分資料會變動，透過 <code>Ajax</code> 就不需要切換整份 HTML，而只要替換變動的那部分資料就好，這才是符合使用者體驗的行為。</p>
+<p>是不是很方便呢？</p>
+<hr>
+<h2 id="那麼，到哪裡才買得到呢？"><a href="#那麼，到哪裡才買得到呢？" class="headerlink" title="那麼，到哪裡才買得到呢？"></a>那麼，到哪裡才買得到呢？</h2><p>不是啦，我是說，要怎樣才能使用如此方便的 <code>Ajax</code>？</p>
+<h4 id="XMLHttpRequest"><a href="#XMLHttpRequest" class="headerlink" title="XMLHttpRequest"></a><code>XMLHttpRequest</code></h4><p>第一種方式，就是透過原生的 <code>JavaScript</code> 去操作，一步步定義好每個 <code>XMLHttpRequest</code> 的 method 與 function，然後送出。</p>
+<p>關於使用原生 JS 操作 <code>XMLHttpRequest</code>，可以參考我之前寫的 <a href="https://gkfat.github.io/gk-blog/2019/09/12/JS-XMLHttpRequest/#more">這篇文章</a>。</p>
+<h4 id="jQuery"><a href="#jQuery" class="headerlink" title="jQuery"></a><code>jQuery</code></h4><p>根據 <a href="https://eyesofkids.gitbooks.io/javascript-start-from-es6/content/part4/ajax_fetch.html" target="_blank" rel="noopener">從ES6開始的JavaScript學習生活</a> 提供的範例，jQuery 在 Ajax 的操作中，提供了與操作 Promise 類似的作法。</p>
+<p>範例如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">    <span class="comment">// 進行要求的網址(URL)</span></span><br><span class="line">    url: <span class="string">'./sample.json'</span>,</span><br><span class="line">    <span class="comment">// 要送出的資料</span></span><br><span class="line">    data: &#123;</span><br><span class="line">        id: <span class="string">'a001'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 要使用的 method</span></span><br><span class="line">    type: <span class="string">'GET'</span>,</span><br><span class="line">    <span class="comment">// 資料的類型</span></span><br><span class="line">    dataType : <span class="string">'json'</span>,</span><br><span class="line">&#125;)</span><br><span class="line">  .done(<span class="function"><span class="keyword">function</span>(<span class="params"> json </span>) </span>&#123;</span><br><span class="line">       <span class="comment">// 要求成功時要執行的程式碼</span></span><br><span class="line">      &#125;)</span><br><span class="line">  .fail(<span class="function"><span class="keyword">function</span>(<span class="params"> xhr, status, errorThrown </span>) </span>&#123;</span><br><span class="line">       <span class="comment">// 要求失敗時要執行的程式碼</span></span><br><span class="line">        <span class="built_in">console</span>.log( <span class="string">'出現錯誤，無法完成!'</span> )</span><br><span class="line">        <span class="built_in">console</span>.log( <span class="string">'Error: '</span> + errorThrown )</span><br><span class="line">        <span class="built_in">console</span>.log( <span class="string">'Status: '</span> + status )</span><br><span class="line">        <span class="built_in">console</span>.dir( xhr )</span><br><span class="line">      &#125;)</span><br><span class="line">  <span class="comment">// 不論成功或失敗都會執行的程式碼</span></span><br><span class="line">  .always(<span class="function"><span class="keyword">function</span>(<span class="params"> xhr, status </span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log( <span class="string">'要求已完成!'</span> )</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>老實說，我一直沒有去碰 jQuey，因為我覺得大部分時候，原生 JS 都能解決，因此一直在加深原生的基礎。</p>
+<h4 id="Fetch"><a href="#Fetch" class="headerlink" title="Fetch"></a><code>Fetch</code></h4><p>這是一個 HTML5 的新 API，而非 ES6 的新語法。但同時，<br>它也會需要使用到 ES6 的 Promise 來實作。</p>
+<p>Fetch 如果成功的話，會回傳一個帶 response 的 Promise 物件。它的語法類似於 jQuery，但相較之下更單純：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fetch( url, &#123;<span class="attr">method</span>: <span class="string">'get'</span>&#125; )</span><br><span class="line">    .then(<span class="function"><span class="keyword">function</span>(<span class="params">response</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 在這裡處理 response</span></span><br><span class="line">    &#125;)</span><br><span class="line">    .catch(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 丟出 Error :(</span></span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>不過要注意的是， Fetch 只要收到回應，都會回傳 Promise，因此需要多加注意分辨成功與失敗的狀態。</p>
+<hr>
+<h2 id="ES6-Promise"><a href="#ES6-Promise" class="headerlink" title="ES6 Promise"></a><code>ES6 Promise</code></h2><p>既然 Fetch 就是會回傳一個 Promise，那麼至少必須了解如何使用 Promsie。</p>
+<p>直接透過範例來看會更好懂：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 異步處理</span></span><br><span class="line">    <span class="comment">// 處理完後，調用 resolve 或 reject</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 或者這樣做</span></span><br><span class="line">fetch( url, &#123;<span class="attr">method</span>: <span class="string">'get'</span>&#125; ) <span class="comment">//這裡會傳回 promise</span></span><br><span class="line">    .then(successCallback&#125;)</span><br><span class="line">    .catch(errorCallback);</span><br></pre></td></tr></table></figure>
+
+<p>簡單地說，Promise 的操作，就是用 <code>.then</code> 與 <code>.catch</code> 去對成功與失敗的結果分別調用 callback。</p>
+<hr>
+<h2 id="Async-Await"><a href="#Async-Await" class="headerlink" title="Async Await"></a><code>Async</code> <code>Await</code></h2><p>既然有了實現異步處理的工具，再來就會渴求更多。如果能夠「指定」處理的順序，那當然再好不過了對吧！</p>
+<p>在認識 <code>async</code> 以前，我如果要設定處理順序，就會在「需要優先處理的 function」內包覆一個 callback，這樣在優先處理完 function 之後，才會去調用那個 callback，繼續處理接下來的部分（這樣寫又複雜又有機會出 bug）。</p>
+<p>但只要在 function 前加上 <code>async</code>，就不需要再寫 callback！只要在需要優先處理的 function 前加上 <code>await</code>，所有程式就都會等這個 function 處理完之後，才繼續執行。</p>
+<p>換句話說，<code>async</code> 會將 function 內的某部分程式碼變為「強迫單線程執行」。</p>
+<p>綜合以上的這些技術與知識，是不是覺得更能輕鬆實作 <code>Ajax</code> 了呢？</p>
+<hr>
+<p>參考資料：</p>
+<ul>
+<li><a href="https://eyesofkids.gitbooks.io/javascript-start-from-es6/content/part4/ajax_fetch.html" target="_blank" rel="noopener">從ES6開始的JavaScript學習生活</a></li>
+<li><a href="http://liubin.org/promises-book/#chapter1-what-is-promise" target="_blank" rel="noopener">JavaScript Promise 迷你書</a></li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/gk-blog/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+            <a href="/gk-blog/tags/Ajax/" rel="tag"># Ajax</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/gk-blog/2019/09/18/JS-class-prototype/" rel="next" title="JavaScript 學習筆記 - Prototype 與 Class">
+                <i class="fa fa-chevron-left"></i> JavaScript 學習筆記 - Prototype 與 Class
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/gk-blog/2019/10/15/road-to-front-end/" rel="prev" title="Road to Front-End Developer">
+                Road to Front-End Developer <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Gk</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/gk-blog/archives/">
+                
+                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">26</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/gkfat" title="GitHub &rarr; https://github.com/gkfat" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:gkgkdesign@gmail.com" title="E-Mail &rarr; mailto:gkgkdesign@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#首先看懂-Ajax-是什麼"><span class="nav-number">1.</span> <span class="nav-text">首先看懂 Ajax 是什麼</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Ajax-定義"><span class="nav-number">1.0.1.</span> <span class="nav-text">Ajax 定義</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#為什麼需要-Ajax？"><span class="nav-number">1.0.2.</span> <span class="nav-text">為什麼需要 Ajax？</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#那麼，到哪裡才買得到呢？"><span class="nav-number">2.</span> <span class="nav-text">那麼，到哪裡才買得到呢？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#XMLHttpRequest"><span class="nav-number">2.0.1.</span> <span class="nav-text">XMLHttpRequest</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jQuery"><span class="nav-number">2.0.2.</span> <span class="nav-text">jQuery</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Fetch"><span class="nav-number">2.0.3.</span> <span class="nav-text">Fetch</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ES6-Promise"><span class="nav-number">3.</span> <span class="nav-text">ES6 Promise</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Async-Await"><span class="nav-number">4.</span> <span class="nav-text">Async Await</span></a></li></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gk</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.2</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/gk-blog/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/gk-blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/gk-blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/gk-blog/js/utils.js?v=7.1.2"></script>
+
+  <script src="/gk-blog/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/gk-blog/js/affix.js?v=7.1.2"></script>
+
+  <script src="/gk-blog/js/schemes/pisces.js?v=7.1.2"></script>
+
+
+
+
+  
+  <script src="/gk-blog/js/scrollspy.js?v=7.1.2"></script>
+<script src="/gk-blog/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/gk-blog/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/gk-blog/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/gk-blog/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/gk-blog/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/gk-blog/images/favicon-32x32-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/gk-blog/images/favicon-16x16-next.png?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/gk-blog/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/gk-blog/',
+    scheme: 'Gemini',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="JavaScript 這語言在某些時候並不是很嚴謹，所以特別去了解那些奇怪的部分，能夠大幅減少莫名其妙卡住的除錯時間。">
+<meta name="keywords" content="JavaScript,hoisting">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript 學習筆記 - hoisting">
+<meta property="og:url" content="https://gkfat.github.io/gk-blog/2019/09/15/JS-hoisting/index.html">
+<meta property="og:site_name" content="Gk&#39;s blog">
+<meta property="og:description" content="JavaScript 這語言在某些時候並不是很嚴謹，所以特別去了解那些奇怪的部分，能夠大幅減少莫名其妙卡住的除錯時間。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-10-03T06:54:17.837Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript 學習筆記 - hoisting">
+<meta name="twitter:description" content="JavaScript 這語言在某些時候並不是很嚴謹，所以特別去了解那些奇怪的部分，能夠大幅減少莫名其妙卡住的除錯時間。">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://gkfat.github.io/gk-blog/2019/09/15/JS-hoisting/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>JavaScript 學習筆記 - hoisting | Gk's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/gk-blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Gk's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">在程式路上舉步維艱。</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/gk-blog/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/gk-blog/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gkfat.github.io/gk-blog/gk-blog/2019/09/15/JS-hoisting/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gk">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/gk-blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gk's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JavaScript 學習筆記 - hoisting
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-09-15 21:57:53" itemprop="dateCreated datePublished" datetime="2019-09-15T21:57:53+08:00">2019-09-15</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-10-03 14:54:17" itemprop="dateModified" datetime="2019-10-03T14:54:17+08:00">2019-10-03</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>JavaScript 這語言在某些時候並不是很嚴謹，所以特別去了解那些奇怪的部分，能夠大幅減少莫名其妙卡住的除錯時間。</p>
+<a id="more"></a>
+
+<hr>
+<h2 id="什麼是-hoisting？"><a href="#什麼是-hoisting？" class="headerlink" title="什麼是 hoisting？"></a>什麼是 hoisting？</h2><p>我們都知道，JS 是一個單線程語言，這也就是說，瀏覽器在讀 code 時，是一行一行讀下來的。那麼：</p>
+<ol>
+<li>宣告變數</li>
+<li>使用變數</li>
+</ol>
+<p>按照邏輯，一定要按照這個順序，才能正常 working，對吧？舉個例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">100</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">//100</span></span><br></pre></td></tr></table></figure>
+
+<p>那麼，這樣寫會印出什麼呢？</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">//print?</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">100</span>;</span><br></pre></td></tr></table></figure>
+
+<p>很簡單嘛！你說。根據你學過的 JS，這個變數還沒有被宣告，所以無法使用，所以會印出 <code>ReferenceError: a is not defined</code>。</p>
+<p>結果一打開 console，嚇死人了！居然跑出 <code>undefined</code>。這代表的是， <code>a</code> 這個變數已經被宣告了，但還沒有被賦值。沒有值這一點很容易理解，畢竟你在賦值以前就使用它嘛，這很正常。但變數宣告 <code>var a;</code> 的部分居然被提到前面來了！？</p>
+<p>這就是 <code>hoisting</code>，提升的概念。</p>
+<p>那麼，再進一步。不只變數會 <code>hoisting</code>，function 也會，而且 function 會優先於變數。用例子來看的話就是像這樣：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a);</span><br><span class="line"><span class="keyword">var</span> a;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>console 會印出什麼？<br>答案是 <code>Function: a</code>。</p>
+<hr>
+<h2 id="ES6-的-hoisting"><a href="#ES6-的-hoisting" class="headerlink" title="ES6 的 hoisting"></a>ES6 的 hoisting</h2><p>如果你跟我一樣，對 JavaScript 已經有一定熟悉度但還沒熟透，你可能會知道 ES6 新增的變數宣告方法 <code>let</code> 與 <code>const</code>，可能也會有個模糊的概念：這兩個宣告方法沒有 <code>hoisting</code>。</p>
+<p>我原本也是這樣想的，直到讀到這一篇文章：<a href="https://blog.techbridge.cc/2018/11/10/javascript-hoisting/" target="_blank" rel="noopener">TechBridge - 我知道你懂 hoisting，可是你了解到多深？</a></p>
+<blockquote>
+<p>這篇文章完整提到 (1)什麼是hoisting？ (2)為什麼我們需要 hoisting？ 以及 (3)hoisting是怎麼運作的？建議各位好好閱讀一下，真的可以理清很多事情。</p>
+</blockquote>
+<p>結果 <code>let</code> 跟 <code>const</code> 還是有 <code>hoisting</code> 的，只是行為跟 <code>var</code> 不同。</p>
+<hr>
+<p>參考資料：</p>
+<ul>
+<li><a href="https://blog.techbridge.cc/2018/11/10/javascript-hoisting/" target="_blank" rel="noopener">TechBridge - 我知道你懂 hoisting，可是你了解到多深？</a></li>
+<li><a href="https://developer.mozilla.org/zh-TW/docs/Glossary/Hoisting" target="_blank" rel="noopener">MDN - Hoisting</a></li>
+<li><a href="https://www.cnblogs.com/liuhe688/p/5891273.html" target="_blank" rel="noopener">JavaScript: 变量提升和函数提升</a></li>
+<li><a href="https://john-dugan.com/hoisting-in-javascript/" target="_blank" rel="noopener">Hoisting in JavaScript</a></li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/gk-blog/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+            <a href="/gk-blog/tags/hoisting/" rel="tag"># hoisting</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/gk-blog/2019/09/14/JS-array-methods/" rel="next" title="JavaScript 學習筆記 - 陣列操作方法">
+                <i class="fa fa-chevron-left"></i> JavaScript 學習筆記 - 陣列操作方法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/gk-blog/2019/09/17/JS-closure/" rel="prev" title="JavaScript 學習筆記 - Closure">
+                JavaScript 學習筆記 - Closure <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Gk</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/gk-blog/archives/">
+                
+                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">26</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/gkfat" title="GitHub &rarr; https://github.com/gkfat" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:gkgkdesign@gmail.com" title="E-Mail &rarr; mailto:gkgkdesign@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什麼是-hoisting？"><span class="nav-number">1.</span> <span class="nav-text">什麼是 hoisting？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ES6-的-hoisting"><span class="nav-number">2.</span> <span class="nav-text">ES6 的 hoisting</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gk</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.2</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/gk-blog/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/gk-blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/gk-blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/gk-blog/js/utils.js?v=7.1.2"></script>
+
+  <script src="/gk-blog/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/gk-blog/js/affix.js?v=7.1.2"></script>
+
+  <script src="/gk-blog/js/schemes/pisces.js?v=7.1.2"></script>
+
+
+
+
+  
+  <script src="/gk-blog/js/scrollspy.js?v=7.1.2"></script>
+<script src="/gk-blog/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/gk-blog/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
