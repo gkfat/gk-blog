@@ -94,18 +94,18 @@
 
 
 
-  <meta name="description" content="初次接觸 Node.js 後，我開始對如何撰寫伺服器的服務感到有興趣，因此繼續學習。這次要來紀錄的就是如何開始撰寫一個 Server 服務。">
-<meta name="keywords" content="Node.js">
+  <meta name="description" content="systemd 裡，除了用來操作服務的 systemctl 指令，另外還有一個 journalctl 指令，能夠用各種方式查看服務執行的日誌。也就是說，這對於除錯也是很有幫助的。">
+<meta name="keywords" content="Journalctl,Systemd,Linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Node.js 學習筆記 - 試著開始寫 Server">
-<meta property="og:url" content="https://gkfat.github.io/gk-blog/2020/04/23/Node-start-writing-server/index.html">
+<meta property="og:title" content="Linux 學習筆記 - Journalctl">
+<meta property="og:url" content="https://gkfat.github.io/gk-blog/2020/05/16/linux-journalctl/index.html">
 <meta property="og:site_name" content="Gk&#39;s blog">
-<meta property="og:description" content="初次接觸 Node.js 後，我開始對如何撰寫伺服器的服務感到有興趣，因此繼續學習。這次要來紀錄的就是如何開始撰寫一個 Server 服務。">
+<meta property="og:description" content="systemd 裡，除了用來操作服務的 systemctl 指令，另外還有一個 journalctl 指令，能夠用各種方式查看服務執行的日誌。也就是說，這對於除錯也是很有幫助的。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-04-22T23:25:43.507Z">
+<meta property="og:updated_time" content="2020-05-16T03:20:44.752Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Node.js 學習筆記 - 試著開始寫 Server">
-<meta name="twitter:description" content="初次接觸 Node.js 後，我開始對如何撰寫伺服器的服務感到有興趣，因此繼續學習。這次要來紀錄的就是如何開始撰寫一個 Server 服務。">
+<meta name="twitter:title" content="Linux 學習筆記 - Journalctl">
+<meta name="twitter:description" content="systemd 裡，除了用來操作服務的 systemctl 指令，另外還有一個 journalctl 指令，能夠用各種方式查看服務執行的日誌。也就是說，這對於除錯也是很有幫助的。">
 
 
 
@@ -113,7 +113,7 @@
 
   
   
-  <link rel="canonical" href="https://gkfat.github.io/gk-blog/2020/04/23/Node-start-writing-server/">
+  <link rel="canonical" href="https://gkfat.github.io/gk-blog/2020/05/16/linux-journalctl/">
 
 
 
@@ -123,7 +123,7 @@
   };
 </script>
 
-  <title>Node.js 學習筆記 - 試著開始寫 Server | Gk's blog</title>
+  <title>Linux 學習筆記 - Journalctl | Gk's blog</title>
   
 
 
@@ -290,7 +290,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gkfat.github.io/gk-blog/gk-blog/2020/04/23/Node-start-writing-server/">
+    <link itemprop="mainEntityOfPage" href="https://gkfat.github.io/gk-blog/gk-blog/2020/05/16/linux-journalctl/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Gk">
@@ -307,7 +307,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Node.js 學習筆記 - 試著開始寫 Server
+          <h1 class="post-title" itemprop="name headline">Linux 學習筆記 - Journalctl
 
               
             
@@ -333,7 +333,7 @@
                 
               
 
-              <time title="Created: 2020-04-23 07:23:15 / Modified: 07:25:43" itemprop="dateCreated datePublished" datetime="2020-04-23T07:23:15+08:00">2020-04-23</time>
+              <time title="Created: 2020-05-16 11:19:06 / Modified: 11:20:44" itemprop="dateCreated datePublished" datetime="2020-05-16T11:19:06+08:00">2020-05-16</time>
             
 
             
@@ -372,42 +372,45 @@
       
 
       
-        <p>初次接觸 <code>Node.js</code> 後，我開始對如何撰寫伺服器的服務感到有興趣，因此繼續學習。這次要來紀錄的就是如何開始撰寫一個 Server 服務。</p>
+        <p><code>systemd</code> 裡，除了用來操作服務的 <code>systemctl</code> 指令，另外還有一個 <code>journalctl</code> 指令，能夠用各種方式查看服務執行的日誌。也就是說，這對於除錯也是很有幫助的。</p>
 <a id="more"></a>
 
 <hr>
-<h2 id="先看看原生的作法"><a href="#先看看原生的作法" class="headerlink" title="先看看原生的作法"></a>先看看原生的作法</h2><p>是的，我就是一個喜歡原生的人，直到現在還是不會 <code>jQuery</code>，一切都用原生硬幹出來（沒有啦，後來還是直接進框架）！</p>
-<h3 id="使用-Nodemon-讓開發更順暢"><a href="#使用-Nodemon-讓開發更順暢" class="headerlink" title="使用 Nodemon 讓開發更順暢"></a>使用 <code>Nodemon</code> 讓開發更順暢</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 使用 Nodemon 來啟動專案</span><br><span class="line">$ nodemon app.js</span><br></pre></td></tr></table></figure>
+<h2 id="journalctl-指令"><a href="#journalctl-指令" class="headerlink" title="journalctl 指令"></a><code>journalctl</code> 指令</h2><p>Journalctl 指令的結構如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ journalctl &lt;條件篩選&gt;</span><br></pre></td></tr></table></figure>
 
-<p>之後，每次更新 <code>Node.js</code> 檔案，<code>Nodemon</code> 就會自動重做這個動作：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 停止 app.js</span><br><span class="line">// 啟動 app.js</span><br></pre></td></tr></table></figure>
+<h3 id="所有日誌"><a href="#所有日誌" class="headerlink" title="所有日誌"></a>所有日誌</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 顯示所有日誌（從最早的紀錄開始）</span></span><br><span class="line">$ journalctl</span><br><span class="line"></span><br><span class="line"><span class="comment">// 反轉日誌的輸出順序（從最新的紀錄開始）</span></span><br><span class="line">$ journalctl -r</span><br><span class="line"><span class="comment">// 或</span></span><br><span class="line">$ journalctl --reverse</span><br><span class="line"></span><br><span class="line"><span class="comment">// 根據時間顯示日誌</span></span><br><span class="line">$ journalctl -S -U</span><br><span class="line"><span class="comment">// 或</span></span><br><span class="line">$ journalctl --since= --until=</span><br></pre></td></tr></table></figure>
 
-<p>就不用再自己手動停止又開起來了，很方便對吧！</p>
-<h3 id="使用-http-來建構伺服器"><a href="#使用-http-來建構伺服器" class="headerlink" title="使用 http 來建構伺服器"></a>使用 <code>http</code> 來建構伺服器</h3><p>要創建一個伺服器的話，原生 <code>Node.js</code> 我們會這樣寫：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 先宣告一個變數，引用 http pacakge</span></span><br><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 再宣告一個變數，並使用 http 的 createServer 方法</span></span><br><span class="line"><span class="keyword">const</span> server = http.createServer(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    res.end(<span class="string">"Hello from node server!"</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 然後指定這個 server 監聽 3000 port</span></span><br><span class="line">server.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="追蹤日誌"><a href="#追蹤日誌" class="headerlink" title="追蹤日誌"></a>追蹤日誌</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 顯示最新的日誌，並不斷顯示新產生的日誌</span></span><br><span class="line">$ journalctl -f</span><br><span class="line"><span class="comment">// 或</span></span><br><span class="line">$ journalctl --follow</span><br></pre></td></tr></table></figure>
 
-<p>只要 <code>$ nodemon app.js</code>，再打開瀏覽器在網址列輸入 <code>localhost:3000</code>，網頁上就會出現 <code>app.js</code> 吐出來的回傳值，也就是 <code>Hello from node server!</code> 了！</p>
+<h3 id="控制日誌格式"><a href="#控制日誌格式" class="headerlink" title="控制日誌格式"></a>控制日誌格式</h3><ul>
+<li><code>short</code>：預設值，每條日誌佔一行</li>
+<li><code>verbose</code>：以結構化的格式顯示日誌</li>
+<li><code>json</code>：將日誌 json 化，每條日誌佔一行</li>
+<li><code>json-pretty</code>：將日誌 json 化，以人方便閱讀的方式排列</li>
+<li><code>cat</code>：顯示日誌內容，不包含任何數據</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 控制日誌顯示的格式</span></span><br><span class="line">$ journalctl -o &lt;格式選項&gt;</span><br><span class="line"><span class="comment">// 或</span></span><br><span class="line">$ journalctl --output=&lt;格式選項&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="以重要性顯示日誌"><a href="#以重要性顯示日誌" class="headerlink" title="以重要性顯示日誌"></a>以重要性顯示日誌</h3><ul>
+<li><code>0</code>：emerg</li>
+<li><code>1</code>：alert</li>
+<li><code>2</code>：crit</li>
+<li><code>3</code>：err</li>
+<li><code>4</code>：warning</li>
+<li><code>5</code>：notice</li>
+<li><code>6</code>：info</li>
+<li><code>7</code>：debug</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 根據重要性等級顯示日誌</span></span><br><span class="line">$ journalctl -p</span><br><span class="line"><span class="comment">// 或</span></span><br><span class="line">$ journalctl --priority=&lt;等級範圍&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="分頁功能"><a href="#分頁功能" class="headerlink" title="分頁功能"></a>分頁功能</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在分頁中跳到日誌的底部</span></span><br><span class="line">$ journalctl -e</span><br><span class="line"><span class="comment">// 或</span></span><br><span class="line">$ journalctl --pager-end</span><br><span class="line"></span><br><span class="line"><span class="comment">// 不要分頁顯示日誌</span></span><br><span class="line">$ journalctl --no-pager</span><br></pre></td></tr></table></figure>
+
 <hr>
-<h2 id="有個很方便的框架，叫做-Express"><a href="#有個很方便的框架，叫做-Express" class="headerlink" title="有個很方便的框架，叫做 Express"></a>有個很方便的框架，叫做 <code>Express</code></h2><p><code>Express</code> 是 <code>Node.js</code> 的框架。雖然我很喜歡寫原生，但那是為了瞭解運作原理。在開發時還是有框架輔助比較有效率。</p>
-<p>使用前需要先安裝 <code>Express</code>，首先在終端機輸入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install express</span><br></pre></td></tr></table></figure>
-
-<p>安裝好後，<code>app.js</code> 就可以改成以下這樣：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 先宣告一個變數，引用 express</span></span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 再宣告一個變數，創建 express 實例</span></span><br><span class="line"><span class="keyword">const</span> server = express();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 給予 server 任務</span></span><br><span class="line">server.get(<span class="string">'/'</span>, (req, res) =&gt; &#123;</span><br><span class="line">    res.send(<span class="string">"Hello from express server!"</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 然後指定這個 server 監聽 3000 port</span></span><br><span class="line">server.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
-
-<p>這樣就完成使用 <code>Express</code> 來創建一個簡單的 server 了！</p>
-<p><code>Express</code> 當然不只這樣，它有非常多非常簡單好用的模組，就讓我邊學邊慢慢紀錄吧！</p>
-<hr>
-<h2 id="模組化"><a href="#模組化" class="headerlink" title="模組化"></a>模組化</h2><p>我們在給予路由任務的時候是這樣寫的：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">server.get(<span class="string">'/'</span>, (req, res) =&gt; &#123;</span><br><span class="line">    <span class="comment">// 做一些事</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>那個「做一些事」的部分，就是存取 “/“ 這個路由的時候對應的處理，但要是有很多內容要執行的話，這份檔案就會變得落落長！不僅閱讀不易，維護更有問題。誰都不喜歡太長的程式碼（<del>但是我常常寫</del>）。</p>
-<p>所以我們要善用 <code>JavaScript</code> 的 <code>Module</code> 概念，把檔案拆分開來：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* routes/get.js */</span></span><br><span class="line"><span class="keyword">const</span> myGetFunc = <span class="function">(<span class="params">res, req</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 很模組化地做一些事</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    myGetFunc</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* app.js */</span></span><br><span class="line"><span class="keyword">const</span> &#123; myGetFunc &#125; = <span class="built_in">require</span>(<span class="string">'./routes/get'</span>);</span><br><span class="line">server.get(<span class="string">'/'</span>, myGetFunc);</span><br></pre></td></tr></table></figure>
-
-<p>這樣，就能夠讓程式碼更簡潔了！</p>
+<p>參考資料：</p>
+<ul>
+<li><a href="http://manpages.ubuntu.com/manpages/bionic/zh_TW/man1/journalctl.1.html" target="_blank" rel="noopener">Ubuntu Manpage: journalctl</a></li>
+</ul>
 
       
     </div>
@@ -434,7 +437,11 @@
         
         <div class="post-tags">
           
-            <a href="/gk-blog/tags/Node-js/" rel="tag"># Node.js</a>
+            <a href="/gk-blog/tags/Journalctl/" rel="tag"># Journalctl</a>
+          
+            <a href="/gk-blog/tags/Systemd/" rel="tag"># Systemd</a>
+          
+            <a href="/gk-blog/tags/Linux/" rel="tag"># Linux</a>
           
         </div>
       
@@ -591,7 +598,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">26</span>
+                      
+                    
+                    <span class="site-state-item-count">27</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>
@@ -655,7 +664,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#先看看原生的作法"><span class="nav-number">1.</span> <span class="nav-text">先看看原生的作法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-Nodemon-讓開發更順暢"><span class="nav-number">1.1.</span> <span class="nav-text">使用 Nodemon 讓開發更順暢</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-http-來建構伺服器"><span class="nav-number">1.2.</span> <span class="nav-text">使用 http 來建構伺服器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有個很方便的框架，叫做-Express"><span class="nav-number">2.</span> <span class="nav-text">有個很方便的框架，叫做 Express</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模組化"><span class="nav-number">3.</span> <span class="nav-text">模組化</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#journalctl-指令"><span class="nav-number">1.</span> <span class="nav-text">journalctl 指令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#所有日誌"><span class="nav-number">1.1.</span> <span class="nav-text">所有日誌</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#追蹤日誌"><span class="nav-number">1.2.</span> <span class="nav-text">追蹤日誌</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#控制日誌格式"><span class="nav-number">1.3.</span> <span class="nav-text">控制日誌格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#以重要性顯示日誌"><span class="nav-number">1.4.</span> <span class="nav-text">以重要性顯示日誌</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分頁功能"><span class="nav-number">1.5.</span> <span class="nav-text">分頁功能</span></a></li></ol></li></ol></div>
             
 
           </div>
