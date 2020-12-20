@@ -1,378 +1,5 @@
-<!DOCTYPE html>
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-<html class="theme-next gemini use-motion" lang>
-<head><meta name="generator" content="Hexo 3.9.0">
-  <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<link rel="stylesheet" href="/gk-blog/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
-
-<link rel="stylesheet" href="/gk-blog/css/main.css?v=7.1.2">
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/gk-blog/images/apple-touch-icon-next.png?v=7.1.2">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/gk-blog/images/favicon-32x32-next.png?v=7.1.2">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/gk-blog/images/favicon-16x16-next.png?v=7.1.2">
-
-
-  <link rel="mask-icon" href="/gk-blog/images/logo.svg?v=7.1.2" color="#222">
-
-
-
-
-
-
-
-<script id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/gk-blog/',
-    scheme: 'Gemini',
-    version: '7.1.2',
-    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
-    back2top: true,
-    back2top_sidebar: false,
-    fancybox: false,
-    fastclick: false,
-    lazyload: false,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-  
-
-
-
-
-  <meta name="description" content="當我還是個稚嫩的高中生時，我非常討厭電腦課教的程式語言（C++／VB），認為這輩子都跟程式絕緣。殊不知在日新月異的前端領域中，我找到了比設計、文案更巨大的成就感。下定決心轉職的幾個月後，我已經找到一份前端工程師的工作了。">
-<meta name="keywords" content="Career">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Road to Front-End Developer">
-<meta property="og:url" content="https://gkfat.github.io/gk-blog/2019/10/15/road-to-front-end/index.html">
-<meta property="og:site_name" content="Gk&#39;s blog">
-<meta property="og:description" content="當我還是個稚嫩的高中生時，我非常討厭電腦課教的程式語言（C++／VB），認為這輩子都跟程式絕緣。殊不知在日新月異的前端領域中，我找到了比設計、文案更巨大的成就感。下定決心轉職的幾個月後，我已經找到一份前端工程師的工作了。">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-10-14T23:32:42.621Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Road to Front-End Developer">
-<meta name="twitter:description" content="當我還是個稚嫩的高中生時，我非常討厭電腦課教的程式語言（C++／VB），認為這輩子都跟程式絕緣。殊不知在日新月異的前端領域中，我找到了比設計、文案更巨大的成就感。下定決心轉職的幾個月後，我已經找到一份前端工程師的工作了。">
-
-
-
-
-
-  
-  
-  <link rel="canonical" href="https://gkfat.github.io/gk-blog/2019/10/15/road-to-front-end/">
-
-
-
-<script id="page.configurations">
-  CONFIG.page = {
-    sidebar: "",
-  };
-</script>
-
-  <title>Road to Front-End Developer | Gk's blog</title>
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .motion-element,
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-title { opacity: initial; }
-
-  .use-motion .logo,
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="default">
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/gk-blog/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Gk's blog</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-    
-      
-        <p class="site-subtitle">在程式路上舉步維艱。</p>
-      
-    
-    
-  </div>
-
-  <div class="site-nav-toggle">
-    <button aria-label="Toggle navigation bar">
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
-</div>
-
-
-
-<nav class="site-nav">
-  
-    <ul id="menu" class="menu">
-      
-        
-        
-        
-          
-          <li class="menu-item menu-item-home">
-
-    
-    
-      
-    
-
-    
-
-    <a href="/gk-blog/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-archives">
-
-    
-    
-      
-    
-
-    
-
-    <a href="/gk-blog/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
-
-  </li>
-
-      
-      
-    </ul>
-  
-
-  
-
-  
-</nav>
-
-
-
-  
-
-
-
-</div>
-    </header>
-
-    
-
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-            
-
-          
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gkfat.github.io/gk-blog/gk-blog/2019/10/15/road-to-front-end/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gk">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/gk-blog/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Gk's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">Road to Front-End Developer
-
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-10-15 07:30:33 / Modified: 07:32:42" itemprop="dateCreated datePublished" datetime="2019-10-15T07:30:33+08:00">2019-10-15</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p>當我還是個稚嫩的高中生時，我非常討厭電腦課教的程式語言（C++／VB），認為這輩子都跟程式絕緣。殊不知在日新月異的前端領域中，我找到了比設計、文案更巨大的成就感。下定決心轉職的幾個月後，我已經找到一份前端工程師的工作了。</p>
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>Road to Front-End Developer - Gk&#039;s blog</title><link rel="manifest" href="/gk-blog/manifest.json"><meta name="application-name" content="Gk&#039;s blog"><meta name="msapplication-TileImage" content="/img/avatar.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Gk&#039;s blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta description="當我還是個稚嫩的高中生時，我非常討厭電腦課教的程式語言（C++／VB），認為這輩子都跟程式絕緣。殊不知在日新月異的前端領域中，我找到了比設計、文案更巨大的成就感。下定決心轉職的幾個月後，我已經找到一份前端工程師的工作了。"><meta property="og:type" content="blog"><meta property="og:title" content="Road to Front-End Developer"><meta property="og:url" content="https://gkfat.github.io/gk-blog/2019/10/15/road-to-front-end/"><meta property="og:site_name" content="Gk&#039;s blog"><meta property="og:description" content="當我還是個稚嫩的高中生時，我非常討厭電腦課教的程式語言（C++／VB），認為這輩子都跟程式絕緣。殊不知在日新月異的前端領域中，我找到了比設計、文案更巨大的成就感。下定決心轉職的幾個月後，我已經找到一份前端工程師的工作了。"><meta property="og:locale" content="zh_TW"><meta property="og:image" content="https://gkfat.github.io/gk-blog/img/og_image.png"><meta property="article:published_time" content="2019-10-14T23:30:33.000Z"><meta property="article:modified_time" content="2019-10-14T23:32:42.621Z"><meta property="article:author" content="Gk"><meta property="article:tag" content="Career"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/gk-blog/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://gkfat.github.io/gk-blog/2019/10/15/road-to-front-end/"},"headline":"Gk's blog","image":["https://gkfat.github.io/gk-blog/img/og_image.png"],"datePublished":"2019-10-14T23:30:33.000Z","dateModified":"2019-10-14T23:32:42.621Z","author":{"@type":"Person","name":"Gk"},"description":"當我還是個稚嫩的高中生時，我非常討厭電腦課教的程式語言（C++／VB），認為這輩子都跟程式絕緣。殊不知在日新月異的前端領域中，我找到了比設計、文案更巨大的成就感。下定決心轉職的幾個月後，我已經找到一份前端工程師的工作了。"}</script><link rel="canonical" href="https://gkfat.github.io/gk-blog/2019/10/15/road-to-front-end/"><link rel="icon" href="/gk-blog/img/avatar.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/gk-blog/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.2.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/gk-blog/"><img src="/gk-blog/img/avatar.png" alt="Gk&#039;s blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/gk-blog/">Home</a><a class="navbar-item" href="/gk-blog/about">About</a><a class="navbar-item" href="/gk-blog/archives">Archives</a><a class="navbar-item" href="/gk-blog/tags">Tags</a></div><div class="navbar-end"><a class="navbar-item search" title="搜尋" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2019-10-14T23:30:33.000Z" title="2019-10-14T23:30:33.000Z">2019-10-15</time>發表</span><span class="level-item"><time dateTime="2019-10-14T23:32:42.621Z" title="2019-10-14T23:32:42.621Z">2019-10-15</time>更新</span><span class="level-item">21 分鐘讀完 (大約3107個字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次訪問</span></div></div><h1 class="title is-3 is-size-4-mobile">Road to Front-End Developer</h1><div class="content"><p>當我還是個稚嫩的高中生時，我非常討厭電腦課教的程式語言（C++／VB），認為這輩子都跟程式絕緣。殊不知在日新月異的前端領域中，我找到了比設計、文案更巨大的成就感。下定決心轉職的幾個月後，我已經找到一份前端工程師的工作了。</p>
 <a id="more"></a>
 
 <hr>
@@ -382,7 +9,7 @@
 <p>說到為什麼會想要轉職成前端工程師，原因其實還滿單純的：因為寫程式很有成就感。</p>
 <p>2018 / 6 月前後，我當時的工作是文案企劃，做著做著就也想順便弄一下自己的部落格（當時比較各家之後選用 WordPress.org），買了網域、找了厲害的工程師朋友幫忙處理後台，勉勉強強也是讓部落格上線了。無奈的是，想要自訂點畫面，卻連 CSS 都看不懂，只能一直加裝 plugin，網站就一直增肥，幾個月後只好放棄。</p>
 <p>大概就是從那個時候開始，覺得 CSS 很有趣。設定點東西，畫面就會改變，這件事帶來相當巨大的成就感。</p>
-<p>從那之後就會時不時地看一下 <a href="https://www.w3schools.com/" target="_blank" rel="noopener">W3Schools</a>，想要多了解一點程式語言，從此一腳踏進前端的世界，回不了頭了。</p>
+<p>從那之後就會時不時地看一下 <a target="_blank" rel="noopener" href="https://www.w3schools.com/">W3Schools</a>，想要多了解一點程式語言，從此一腳踏進前端的世界，回不了頭了。</p>
 <hr>
 <h2 id="莫名其妙開始的自學之路"><a href="#莫名其妙開始的自學之路" class="headerlink" title="莫名其妙開始的自學之路"></a>莫名其妙開始的自學之路</h2><blockquote>
 <p>你真的知道自己在做什麼嗎？</p>
@@ -394,9 +21,9 @@
 <p>我爬了不少文章跟網站，總算稍微分得清前／後端。但嚇人的是，程式語言的語言、框架、函式庫、專業術語就像床上的塵蟎一樣，想到就頭皮發麻。我一直不斷地搜尋、整理、調整，總算列出自己想要的學習路徑，之後才是去驗證這條路徑到底適不適合我（必須且戰且走才知道！）。</p>
 <p>下面列出一些滿值得參考的文件，沒方向的時候就上去看看自己在哪個階段、應該要去學什麼：</p>
 <ul>
-<li><a href="https://docs.google.com/document/d/13nK_XY9u5uIleTpSCw88lMupzgCSwXd6j6je44eLhMQ/edit" target="_blank" rel="noopener">前端資源懶人包</a></li>
-<li><a href="https://www.yuque.com/fe9/basic?fbclid=IwAR1nXfWqA4CQeD-4R1tH2h8jtwtAFDB4pSKQmhichLeFrHA3csIxvRH-Zv8https://www.yuque.com/fe9/basic?fbclid=IwAR1nXfWqA4CQeD-4R1tH2h8jtwtAFDB4pSKQmhichLeFrHA3csIxvRH-Zv8" target="_blank" rel="noopener">前端九部 - 入門者手冊2019</a></li>
-<li><a href="https://github.com/aszx87410/frontend-intermediate-course" target="_blank" rel="noopener">胡立 - 前端循序漸進學習路程</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.google.com/document/d/13nK_XY9u5uIleTpSCw88lMupzgCSwXd6j6je44eLhMQ/edit">前端資源懶人包</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.yuque.com/fe9/basic?fbclid=IwAR1nXfWqA4CQeD-4R1tH2h8jtwtAFDB4pSKQmhichLeFrHA3csIxvRH-Zv8https://www.yuque.com/fe9/basic?fbclid=IwAR1nXfWqA4CQeD-4R1tH2h8jtwtAFDB4pSKQmhichLeFrHA3csIxvRH-Zv8">前端九部 - 入門者手冊2019</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/aszx87410/frontend-intermediate-course">胡立 - 前端循序漸進學習路程</a></li>
 <li>網路上許多大大的轉職心得文</li>
 </ul>
 <p>東看看西看看之後，我得到的結論是，前端的一切其實都是從這三個東西延伸出來的：</p>
@@ -411,10 +38,10 @@
 <blockquote>
 <p>在這個階段，很適合去看一些基礎的教學影片，或跟著免費課程一步一步學習，例如：</p>
 <ul>
-<li><a href="https://www.youtube.com/user/padalab/playlists?view=50&sort=dd&shelf_id=4" target="_blank" rel="noopener">澎澎的 JavaScript 前端工程</a></li>
-<li><a href="https://www.youtube.com/user/TechGuyWeb" target="_blank" rel="noopener">Traversy Media</a></li>
-<li><a href="https://www.freecodecamp.org/" target="_blank" rel="noopener">Free Code Camp</a></li>
-<li><a href="https://www.codecademy.com/" target="_blank" rel="noopener">CodeCademy</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/user/padalab/playlists?view=50&sort=dd&shelf_id=4">澎澎的 JavaScript 前端工程</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/user/TechGuyWeb">Traversy Media</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.freecodecamp.org/">Free Code Camp</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.codecademy.com/">CodeCademy</a></li>
 </ul>
 </blockquote>
 <h3 id="自學最重要的事"><a href="#自學最重要的事" class="headerlink" title="自學最重要的事"></a>自學最重要的事</h3><blockquote>
@@ -449,14 +76,14 @@
 </blockquote>
 <p>前前後後空窗了 4 個半月，是我人生中目前為止空窗最久的一段時間了。</p>
 <p>這段期間，每天大部分的時間都花在學習程式上。當然，「假如失敗」的念頭，三不五時就會冒出來。每當這種時候，轉移注意力、貨回憶初衷，都是很有效的辦法，能將自己拉回正軌。</p>
-<p>當你專注在一件事情上的時候，全宇宙都會來推你一把！就是在這個時期，我參加了幾個前端 Facebook 社團，而剛好看到了 Luka 大大創立的 <a href="https://www.facebook.com/CodeShiba/" target="_blank" rel="noopener">程式柴 Codeshiba</a> 專頁，當時正準備開啟一連串的職涯領航計畫，衝著免費我就報名了。</p>
+<p>當你專注在一件事情上的時候，全宇宙都會來推你一把！就是在這個時期，我參加了幾個前端 Facebook 社團，而剛好看到了 Luka 大大創立的 <a target="_blank" rel="noopener" href="https://www.facebook.com/CodeShiba/">程式柴 Codeshiba</a> 專頁，當時正準備開啟一連串的職涯領航計畫，衝著免費我就報名了。</p>
 <p>發現有一群人跟自己在同樣的道路上掙扎前進，那種感覺是無可比擬的，就好像原本是獨自一人在跑馬拉松，突然發現其實身邊全是夥伴的感覺。而且有個 mentor 領跑，更能夠幫助自己看清方向，去除掉不必要的、浪費時間的事，更有效率地專注在達成目標上。</p>
 <p>CodeShiba 社團真的給予我很大的助力，跪拜 Luka 大大。</p>
 <blockquote>
 <p>想加入需要通過審核，請自行私訊程式柴粉絲頁</p>
 <ul>
-<li>粉絲頁： <a href="https://www.facebook.com/CodeShiba/" target="_blank" rel="noopener">程式柴 Codeshiba</a> </li>
-<li>社團： <a href="https://www.facebook.com/groups/1723508807794929/" target="_blank" rel="noopener">CodeShiba 學員專區</a></li>
+<li>粉絲頁： <a target="_blank" rel="noopener" href="https://www.facebook.com/CodeShiba/">程式柴 Codeshiba</a> </li>
+<li>社團： <a target="_blank" rel="noopener" href="https://www.facebook.com/groups/1723508807794929/">CodeShiba 學員專區</a></li>
 </ul>
 </blockquote>
 <hr>
@@ -475,7 +102,7 @@
 </ul>
 <p>除了自己去面試，也可以多多參考他人的履歷，Luka 相當熟知怎樣的履歷看起來會吸引人而且程度很高，被他調整履歷了之後不久，我就找到目前的工作了（當然，還是有一些運氣成份，幸好面試主管實際問到的問題我答得出來）。實在是可喜可賀！</p>
 <blockquote>
-<p><a href="https://www.cakeresume.com/s--nFb6N436eKp-1VNtf_cmSg--/gk-wang" target="_blank" rel="noopener">GK 的履歷，看看笑笑就好</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cakeresume.com/s--nFb6N436eKp-1VNtf_cmSg--/gk-wang">GK 的履歷，看看笑笑就好</a></p>
 </blockquote>
 <hr>
 <h2 id="Road-to-Front-End-Developer-Never-Ends"><a href="#Road-to-Front-End-Developer-Never-Ends" class="headerlink" title="Road to Front End Developer Never Ends"></a>Road to Front End Developer Never Ends</h2><blockquote>
@@ -501,451 +128,57 @@
 <p>原本的目標是兩年內要能夠自己寫含前後端的部落格，不過我現在期望自己能夠盡快學會跟 App 有關的能力，因為我有一些有趣的遊戲跟應用的點子，卻寫不出來，很痛苦啊。</p>
 <p>對我來說，轉職只是個中繼點，通過這個 check point，不代表已經到終點了，還是必須繼續朝目標前進。終極目標是什麼？其實我也不曉得，就且戰且走吧。</p>
 <p>總而言之，祝各位在轉職的路上，穩定踏實地邁進！</p>
-
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-        
-          
-        
-        <div class="post-tags">
-          
-            <a href="/gk-blog/tags/Career/" rel="tag"># Career</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/gk-blog/2019/10/04/JS-Ajax/" rel="next" title="JavaScript 學習筆記 - AJAX">
-                <i class="fa fa-chevron-left"></i> JavaScript 學習筆記 - AJAX
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/gk-blog/2019/10/21/Angular-basic/" rel="prev" title="Angular 學習筆記 - 從頭認識一個框架">
-                Angular 學習筆記 - 從頭認識一個框架 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-  </div>
-
-
-          </div>
-          
-
-  
-
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <p class="site-author-name" itemprop="name">Gk</p>
-              <div class="site-description motion-element" itemprop="description"></div>
-          </div>
-
-          
-            <nav class="site-state motion-element">
-              
-                <div class="site-state-item site-state-posts">
-                
-                  <a href="/gk-blog/archives/">
-                
-                    <span class="site-state-item-count">21</span>
-                    <span class="site-state-item-name">posts</span>
-                  </a>
-                </div>
-              
-
-              
-
-              
-                
-                
-                <div class="site-state-item site-state-tags">
-                  
-                    
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">27</span>
-                    <span class="site-state-item-name">tags</span>
-                  
-                </div>
-              
-            </nav>
-          
-
-          
-
-          
-
-          
-            <div class="links-of-author motion-element">
-              
-                <span class="links-of-author-item">
-                  
-                  
-                    
-                  
-                  
-                    
-                  
-                  <a href="https://github.com/gkfat" title="GitHub &rarr; https://github.com/gkfat" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
-                </span>
-              
-                <span class="links-of-author-item">
-                  
-                  
-                    
-                  
-                  
-                    
-                  
-                  <a href="mailto:gkgkdesign@gmail.com" title="E-Mail &rarr; mailto:gkgkdesign@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
-                </span>
-              
-            </div>
-          
-
-          
-
-          
-          
-
-          
-            
-          
-          
-
-        </div>
-      </div>
-
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一切都始於一個小小的契機"><span class="nav-number">1.</span> <span class="nav-text">一切都始於一個小小的契機</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#莫名其妙開始的自學之路"><span class="nav-number">2.</span> <span class="nav-text">莫名其妙開始的自學之路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#學習路徑"><span class="nav-number">2.1.</span> <span class="nav-text">學習路徑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自學最重要的事"><span class="nav-number">2.2.</span> <span class="nav-text">自學最重要的事</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#支撐我繼續走下去的成就感來源：進入心流"><span class="nav-number">2.3.</span> <span class="nav-text">支撐我繼續走下去的成就感來源：進入心流</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#確定要來真的了嗎？轉職的轉捩點"><span class="nav-number">3.</span> <span class="nav-text">確定要來真的了嗎？轉職的轉捩點</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#果斷辭職"><span class="nav-number">3.1.</span> <span class="nav-text">果斷辭職</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#久到令人心慌的空窗期"><span class="nav-number">3.2.</span> <span class="nav-text">久到令人心慌的空窗期</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#跌跌撞撞的面試"><span class="nav-number">4.</span> <span class="nav-text">跌跌撞撞的面試</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#面試才知道自己哪裡不足"><span class="nav-number">4.1.</span> <span class="nav-text">面試才知道自己哪裡不足</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Road-to-Front-End-Developer-Never-Ends"><span class="nav-number">5.</span> <span class="nav-text">Road to Front End Developer Never Ends</span></a></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
-  
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
-  <span class="with-love" id="animate">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Gk</span>
-
-  
-
-  
-</div>
-
-
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
-
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.2</div>
-
-
-
-
-        
-
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
-    
-
-    
-  </div>
-
-  
-
-<script>
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <script src="/gk-blog/lib/jquery/index.js?v=3.4.1"></script>
-
-  
-  <script src="/gk-blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script src="/gk-blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-
-  
-
-
-  <script src="/gk-blog/js/utils.js?v=7.1.2"></script>
-
-  <script src="/gk-blog/js/motion.js?v=7.1.2"></script>
-
-
-
-  
-  
-
-
-  <script src="/gk-blog/js/affix.js?v=7.1.2"></script>
-
-  <script src="/gk-blog/js/schemes/pisces.js?v=7.1.2"></script>
-
-
-
-
-  
-  <script src="/gk-blog/js/scrollspy.js?v=7.1.2"></script>
-<script src="/gk-blog/js/post-details.js?v=7.1.2"></script>
-
-
-
-  
-
-
-  <script src="/gk-blog/js/next-boot.js?v=7.1.2"></script>
-
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-
-  
-
-
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-</body>
-</html>
+</div><div class="article-licensing box"><div class="licensing-title"><p>Road to Front-End Developer</p><p><a href="https://gkfat.github.io/gk-blog/2019/10/15/road-to-front-end/">https://gkfat.github.io/gk-blog/2019/10/15/road-to-front-end/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Gk</p></div></div><div class="level-item is-narrow"><div><h6>發表於</h6><p>2019-10-15</p></div></div><div class="level-item is-narrow"><div><h6>更新於</h6><p>2019-10-15</p></div></div><div class="level-item is-narrow"><div><h6>許可協議</h6><p><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="icon" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a><a class="icon" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/gk-blog/tags/Career/">Career</a></div><!--!--></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜歡這篇文章嗎? 贊助一下作者吧!</h3><div class="buttons is-centered"></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/gk-blog/2019/10/21/Angular-basic/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Angular 學習筆記 - 從頭認識一個框架</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/gk-blog/2019/10/04/JS-Ajax/"><span class="level-item">JavaScript 學習筆記 - AJAX</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">評論</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'https://gkfat.github.io/gk-blog/2019/10/15/road-to-front-end/';
+            this.page.identifier = '2019/10/15/road-to-front-end/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'visitor' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/gk-blog/img/gkfat.png" alt="Gk"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Gk</p><p class="is-size-6 is-block">Web Front-End Developer</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Taipei, Taiwan</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/gk-blog/archives"><p class="title">21</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分類</p><a href="/gk-blog/categories"><p class="title">0</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">標籤</p><a href="/gk-blog/tags"><p class="title">27</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/gkfat" target="_blank" rel="noopener">追蹤</a></div><div class="level is-mobile"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/gkfat"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Facebook" href="https://www.linkedin.com/in/gkgkwang"><i class="fab fa-linkedin"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Twitter" href="https://anchor.fm/glhffreestyletalk"><i class="fas fa-podcast"></i></a></div></div></div><!--!--><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2020-05-16T03:19:06.420Z">2020-05-16</time></p><p class="title"><a href="/gk-blog/2020/05/16/linux-journalctl/">Linux 學習筆記 - Journalctl</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2020-04-19T09:04:55.428Z">2020-04-19</time></p><p class="title"><a href="/gk-blog/2020/04/19/linux-systemctl/">Linux 學習筆記 - Systemd</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2020-01-26T10:27:41.000Z">2020-01-26</time></p><p class="title"><a href="/gk-blog/2020/01/26/self-manage/">自我管理心法（一）：為什麼要自我管理？</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2019-12-22T08:30:14.000Z">2019-12-22</time></p><p class="title"><a href="/gk-blog/2019/12/22/web-http/">Web 學習筆記 - HTTP</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2019-12-22T06:28:48.000Z">2019-12-22</time></p><p class="title"><a href="/gk-blog/2019/12/22/Node-intro/">Node.js 學習筆記 - 初次接觸 Node.js</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">彙整</h3><ul class="menu-list"><li><a class="level is-mobile" href="/gk-blog/archives/2020/05/"><span class="level-start"><span class="level-item">五月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/gk-blog/archives/2020/04/"><span class="level-start"><span class="level-item">四月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/gk-blog/archives/2020/01/"><span class="level-start"><span class="level-item">一月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/gk-blog/archives/2019/12/"><span class="level-start"><span class="level-item">十二月 2019</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/gk-blog/archives/2019/10/"><span class="level-start"><span class="level-item">十月 2019</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/gk-blog/archives/2019/09/"><span class="level-start"><span class="level-item">九月 2019</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li><li><a class="level is-mobile" href="/gk-blog/archives/2019/06/"><span class="level-start"><span class="level-item">六月 2019</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">標籤</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/gk-blog/tags/Ajax/"><span class="tag">Ajax</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/Angular/"><span class="tag">Angular</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/Career/"><span class="tag">Career</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">9</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/Journalctl/"><span class="tag">Journalctl</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/LifeCycle/"><span class="tag">LifeCycle</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/Linux/"><span class="tag">Linux</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/Node-js/"><span class="tag">Node.js</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/Systemctl/"><span class="tag">Systemctl</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/Systemd/"><span class="tag">Systemd</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/XMLHttpRequest/"><span class="tag">XMLHttpRequest</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/class/"><span class="tag">class</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/closure/"><span class="tag">closure</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/cookie/"><span class="tag">cookie</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/git/"><span class="tag">git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/hexo/"><span class="tag">hexo</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/hoisting/"><span class="tag">hoisting</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/html/"><span class="tag">html</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/http/"><span class="tag">http</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/localStorage/"><span class="tag">localStorage</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/nginx/"><span class="tag">nginx</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/prototype/"><span class="tag">prototype</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/session/"><span class="tag">session</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/sessionStorage/"><span class="tag">sessionStorage</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/vue-js/"><span class="tag">vue.js</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/web/"><span class="tag">web</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/%E8%87%AA%E6%88%91%E7%AE%A1%E7%90%86/"><span class="tag">自我管理</span><span class="tag">1</span></a></div></div></div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">訂閱 Email</h3><form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open(&#039;https://feedburner.google.com/fb/a/mailverify?uri=&#039;,&#039;popupwindow&#039;,&#039;scrollbars=yes,width=550,height=520&#039;);return true"><input type="hidden" value="" name="uri"><input type="hidden" name="loc" value="en_US"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="訂閱"></div></div></form></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/gk-blog/"><img src="/gk-blog/img/avatar.png" alt="Gk&#039;s blog" height="28"></a><p class="is-size-7"><span>&copy; 2020 Gk</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>個訪客</span></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" async></script><script>moment.locale("zh-TW");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/gk-blog/js/column.js"></script><script src="/gk-blog/js/animation.js"></script><a id="back-to-top" title="回到頁首" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/gk-blog/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此網站使用Cookie來改善您的體驗。",
+          dismiss: "知道了！",
+          allow: "允許使用Cookie",
+          deny: "拒絕",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/gk-blog/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="請輸入關鍵字..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/gk-blog/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/gk-blog/content.json"}, {"hint":"請輸入關鍵字...","untitled":"(無標題)","posts":"文章","pages":"頁面","categories":"分類","tags":"標籤"});
+        });</script></body></html>
