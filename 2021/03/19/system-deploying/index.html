@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>前後端＆資料庫系統建置心得 - Gk&#039;s blog</title><link rel="manifest" href="/gk-blog/manifest.json"><meta name="application-name" content="Gk&#039;s blog"><meta name="msapplication-TileImage" content="/img/avatar.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Gk&#039;s blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta description="機緣巧合下，我接到了個任務，需要把一套系統在一個新建的 Server 上架起來。盤點手上資源，是幾套程式碼，還有前人遺留在各 Server 的設定檔。我是剛轉職一年的前端工程師，對前端領域可說是才剛有一些心得，現在就來了這個任務…好吧！解就解，誰怕誰（反正有 Stack Overflow）！"><meta property="og:type" content="blog"><meta property="og:title" content="前後端＆資料庫系統建置心得"><meta property="og:url" content="https://gkfat.github.io/gk-blog/2021/03/19/system-deploying/"><meta property="og:site_name" content="Gk&#039;s blog"><meta property="og:description" content="機緣巧合下，我接到了個任務，需要把一套系統在一個新建的 Server 上架起來。盤點手上資源，是幾套程式碼，還有前人遺留在各 Server 的設定檔。我是剛轉職一年的前端工程師，對前端領域可說是才剛有一些心得，現在就來了這個任務…好吧！解就解，誰怕誰（反正有 Stack Overflow）！"><meta property="og:locale" content="zh_TW"><meta property="og:image" content="https://i.imgur.com/0RqkfVN.png"><meta property="article:published_time" content="2021-03-19T14:00:35.000Z"><meta property="article:modified_time" content="2021-03-19T14:02:40.277Z"><meta property="article:author" content="Gk"><meta property="article:tag" content="fullStack"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="https://i.imgur.com/0RqkfVN.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://gkfat.github.io/gk-blog/2021/03/19/system-deploying/"},"headline":"Gk's blog","image":["https://i.imgur.com/0RqkfVN.png"],"datePublished":"2021-03-19T14:00:35.000Z","dateModified":"2021-03-19T14:02:40.277Z","author":{"@type":"Person","name":"Gk"},"description":"機緣巧合下，我接到了個任務，需要把一套系統在一個新建的 Server 上架起來。盤點手上資源，是幾套程式碼，還有前人遺留在各 Server 的設定檔。我是剛轉職一年的前端工程師，對前端領域可說是才剛有一些心得，現在就來了這個任務…好吧！解就解，誰怕誰（反正有 Stack Overflow）！"}</script><link rel="canonical" href="https://gkfat.github.io/gk-blog/2021/03/19/system-deploying/"><link rel="icon" href="/gk-blog/img/avatar.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/gk-blog/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.2.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/gk-blog/"><img src="/gk-blog/img/avatar.png" alt="Gk&#039;s blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/gk-blog/">Home</a><a class="navbar-item" href="/gk-blog/about">About</a><a class="navbar-item" href="/gk-blog/archives">Archives</a><a class="navbar-item" href="/gk-blog/tags">Tags</a></div><div class="navbar-end"><a class="navbar-item search" title="搜尋" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-03-19T14:00:35.000Z" title="2021-03-19T14:00:35.000Z">2021-03-19</time>發表</span><span class="level-item"><time dateTime="2021-03-19T14:02:40.277Z" title="2021-03-19T14:02:40.277Z">2021-03-19</time>更新</span><span class="level-item">13 分鐘讀完 (大約1893個字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次訪問</span></div></div><h1 class="title is-3 is-size-4-mobile">前後端＆資料庫系統建置心得</h1><div class="content"><p>機緣巧合下，我接到了個任務，需要把一套系統在一個新建的 Server 上架起來。盤點手上資源，是幾套程式碼，還有前人遺留在各 Server 的設定檔。我是剛轉職一年的前端工程師，對前端領域可說是才剛有一些心得，現在就來了這個任務…好吧！解就解，誰怕誰（<del>反正有 Stack Overflow</del>）！</p>
+<a id="more"></a>
+
+<hr>
+<h2 id="系統架構"><a href="#系統架構" class="headerlink" title="系統架構"></a>系統架構</h2><p>要從無到有將系統建起來，首先需要了解系統的架構。廢話不多說，先上圖。</p>
+<p><img src="https://i.imgur.com/0RqkfVN.png" alt=""></p>
+<p>這個系統是長成這個鬼樣子的，至於為什麼要用這麼多種語言設計，不要問我，去問前人。總之這系統上的各套服務，原本是架在不同 Server 的，而我這次要做的事情就是將它們全部搬到同個 Server 運行。</p>
+<p>經過一陣子的研究後，要達成目標，需要下列技術：</p>
+<ol>
+<li>Linux 基本操作</li>
+<li>資料庫安裝（MariaDB &amp; MongoDB）</li>
+<li>Node.js build &amp; deploy</li>
+<li>Golang build &amp; deploy</li>
+<li>Angular build &amp; deploy</li>
+<li>Service config（systemd）</li>
+<li>Web Server config（httpd）</li>
+</ol>
+<blockquote>
+<p>補充一下困難程度，在開始做這件事前，我會的只有 5 而已…</p>
+</blockquote>
+<hr>
+<h2 id="資料庫建置"><a href="#資料庫建置" class="headerlink" title="資料庫建置"></a>資料庫建置</h2><p>好！那麼首先要嘗試的，就是資料庫的安裝。</p>
+<p>由於對這兩套資料庫完全不了解，我先在本機（Mac）試著用 <code>homebrew</code> 安裝了幾次。現在回過頭看覺得挺好笑的，因為後來才知道在 Mac 安裝跟在 <code>Linux</code> 安裝，完全是兩回事…</p>
+<h3 id="MariaDB"><a href="#MariaDB" class="headerlink" title="MariaDB"></a>MariaDB</h3><ul>
+<li>MacOS 安裝：<a target="_blank" rel="noopener" href="https://mariadb.com/kb/en/installing-mariadb-on-macos-using-homebrew/">https://mariadb.com/kb/en/installing-mariadb-on-macos-using-homebrew/</a></li>
+<li>Linux 安裝：<a target="_blank" rel="noopener" href="https://blog.gtwang.org/linux/centos-7-install-mariadb-mysql-server-tutorial/">https://blog.gtwang.org/linux/centos-7-install-mariadb-mysql-server-tutorial/</a></li>
+</ul>
+<h3 id="MongoDB"><a href="#MongoDB" class="headerlink" title="MongoDB"></a>MongoDB</h3><ul>
+<li>MacOS 安裝：<a target="_blank" rel="noopener" href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/">https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/</a></li>
+<li>Linux 安裝：<a target="_blank" rel="noopener" href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/">https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/</a></li>
+</ul>
+<blockquote>
+<p>目標伺服器是 <code>Linux CentOS 7</code>，也是因此契機才稍微去瞭解了下 <code>Linux</code> 作業系統，才知道原來有非常多版本。有興趣知道更多可參考這篇：<a target="_blank" rel="noopener" href="https://blog.darkthread.net/blog/linux-server-os-survey/">黑暗執行緒 - 我的 Linux 作業系統考察</a></p>
+</blockquote>
+<p>安裝了資料庫後才是真正的開始，會遇到 root 密碼無法登入問題、安全性設定問題等怪事，這部分就不細說了，總之 Stack Overflow 是你我的好朋友。</p>
+<hr>
+<h2 id="Node-js-專案部署"><a href="#Node-js-專案部署" class="headerlink" title="Node.js 專案部署"></a>Node.js 專案部署</h2><p>完成資料庫的安裝後，接著是 <code>Form Service</code>，因為這套要先運行起來，<code>Main Service</code> 才能運行。由於在前端打滾了一年，多少還是懂一點 NPM，因此只要稍微讀一下 <code>Package.json</code>，就大概知道操作指令有哪些了。</p>
+<p>接著，做下面這些事情：</p>
+<ul>
+<li>將專案資料夾複製到伺服器的專案路徑下</li>
+<li>建立服務的設定檔（/lib/systemd/system/<service_name>.service）</li>
+<li>在專案路徑執行 <code>npm install</code> 以下載依賴套件</li>
+<li>啟動服務：<code>systemctl start &lt;service_name&gt;.service</code></li>
+<li>檢查服務：<code>systemctl status &lt;service_name&gt;.service</code></li>
+<li>開放 tcp 連線 port：<code>firewall-cmd --add-port=&lt;port_number&gt;/tcp</code></li>
+</ul>
+<blockquote>
+<p>在服務設定檔中會指定專案路徑，以及在這個路徑底下要 <code>Linux</code> 執行什麼指令，因此熟悉的 <code>npm run start</code> 就會寫在這裡。</p>
+</blockquote>
+<hr>
+<h2 id="Golang-專案部署"><a href="#Golang-專案部署" class="headerlink" title="Golang 專案部署"></a>Golang 專案部署</h2><p>在測試過 <code>Form Service</code> 正常運行後，就可以來接著架 <code>Main Service</code> 了。由於我完全不會 <code>Golang</code>，因此花了一些時間從頭學習，也整理出幾個 <code>Go</code> 常用的套件，找了一些 tutorial 來做。</p>
+<p><code>Golang</code> 常用套件：</p>
+<ul>
+<li><code>Gin</code>：http server</li>
+<li><code>Gorm</code>：MariaDB 操作</li>
+<li><code>Mongo</code>：MongoDB 操作</li>
+<li><code>Cron</code>：排程設定</li>
+<li><code>Cobra</code>：指令處理</li>
+<li><code>Jwt</code>：認證處理</li>
+</ul>
+<p>熟悉了基本的結構後，就可以試著來 Build Project 了。在打包 <code>Golang</code> 成應用程式時，必須要注意要運行的環境規格（<code>GOOS</code>、<code>GOARCH</code>）。</p>
+<p>接著，做下面這些事情：</p>
+<ul>
+<li>將專案資料夾複製到伺服器的專案路徑下</li>
+<li>建立服務的設定檔（/lib/systemd/system/<service_name>.service）</li>
+<li>啟動服務：<code>systemctl start &lt;service_name&gt;.service</code></li>
+<li>檢查服務：<code>systemctl status &lt;service_name&gt;.service</code></li>
+<li>開放 tcp 連線 port：<code>firewall-cmd --add-port=&lt;port_number&gt;/tcp</code></li>
+</ul>
+<blockquote>
+<p>因為 <code>Main Service</code> 需要接收 http request，因此 tcp 一定要確認好。</p>
+</blockquote>
+<hr>
+<h2 id="Angular-專案部署"><a href="#Angular-專案部署" class="headerlink" title="Angular 專案部署"></a>Angular 專案部署</h2><p>資料庫跟前面兩套系統 run 起來之後，終於來到熟悉的 <code>Angular</code> 專案部署。因為很常做，這裡就不廢話，按照 <code>Package.json</code> 裡的說明 Build，然後複製到伺服器的專案路徑資料夾即可。</p>
+<p>有一點可以延伸討論，前人有為這個專案留下 <code>Shell Script</code> 部署檔，讓打包部署流程變得方便許多，這次在仔細研讀後，也對整個流程到底是做了哪些事情有進一步的認識。或許之後也可以寫一些 <code>Shell Script</code> 小工具。</p>
+<hr>
+<h2 id="Linux-設定"><a href="#Linux-設定" class="headerlink" title="Linux 設定"></a>Linux 設定</h2><p>在部署上面前後端程式及資料庫的過程中，一直有碰到陌生的未知領域，在查找了好一陣子之後，整理出下面三塊 <code>Linux</code> 設定。</p>
+<h3 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h3><p>通常後端服務都會作為 Service 運行，而在 <code>Linux</code> 想要運行服務，很常會用到的一些基本指令（也是我在這次架站過程中反覆用到的指令），整理如下：</p>
+<ul>
+<li><code>Lsof</code>：<ul>
+<li>查詢目前使用中的 port 及 process id：<code>lsof -n -i</code></li>
+<li>查詢特定 port 的服務：<code>lsof -n -i:&lt;port_number&gt;</code></li>
+<li>清除 PID：<code>kill &lt;PID&gt;</code></li>
+</ul>
+</li>
+<li><code>Systemctl</code>：<ul>
+<li>查看所有服務狀態：<code>systemctl --type=service</code></li>
+<li>查看特定服務狀態：<code>systemctl status &lt;service name&gt;</code></li>
+<li>啟動服務：<code>systemctl start &lt;service name&gt;</code></li>
+<li>停止服務：<code>systemctl stop &lt;service name&gt;</code></li>
+<li>重啟服務：<code>systemctl restart &lt;service name&gt;</code></li>
+<li>查看服務的設定檔：<code>systemctl cat &lt;service name&gt;</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="Firewall"><a href="#Firewall" class="headerlink" title="Firewall"></a>Firewall</h3><p>後端服務 run 起來時我也稍微卡了一下，因為從 local 明明就可以打到 API，不知為何換個 ip 就一直失敗。後來查到原來是防火牆沒設定好，真相往往就這麼簡單。</p>
+<p>常用指令：</p>
+<ul>
+<li>列出使用中的 port：<code>firewall-cmd --list-ports</code></li>
+<li>打開 port：<code>firewall-cmd --add-port=&lt;port_number&gt;/tcp</code></li>
+<li>永久打開 port：<code>firewall-cmd --permanent --add-port=&lt;port_number&gt;/tcp</code></li>
+<li>重啟：<code>firewall-cmd --reload</code></li>
+<li>關閉 port：<code>firewall-cmd --remove-port=&lt;port_number&gt;/tcp</code></li>
+</ul>
+<blockquote>
+<p>其實除了預設的 80 Port 外，應盡量少讓其他人可以透過 tcp 直接連進伺服器會比較好，這部分的知識我尚未具備，還需要深入精進。</p>
+</blockquote>
+<h3 id="Web-Server"><a href="#Web-Server" class="headerlink" title="Web Server"></a>Web Server</h3><p>這裡也是卡很久，但其實若對 <code>httpd</code> 有些了解，應該是很簡單的事，因為就是<code>Directory</code> 跟 <code>Proxy Reverse</code> 兩件事而已。</p>
+<blockquote>
+<p>其實應該還缺 SSL 憑證相關的東西，但因為這次沒有接觸到設定網域名稱，之後有碰到再說吧！目前遇到的都還不是非常難的問題，一樣是那句話，凡事問 Stack Overflow 就有解了XD（例如說 Apache config 檔案在哪…<a target="_blank" rel="noopener" href="https://www.liquidweb.com/kb/apache-configuration-centos/">Where is the Apache configuration in CentOS</a>）</p>
+</blockquote>
+<hr>
+<h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p>從研究各套 code 到嘗試建置的過程，前後加起來共 2 週，對一個 Senior 來說可能嫌太久（或許 Senior 只需要 3 天？），但我給自己一個正面的肯定。經過這次的磨練，補強知識的同時也在訓練自學能力，覺得能解這次任務實在是太好了！</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>前後端＆資料庫系統建置心得</p><p><a href="https://gkfat.github.io/gk-blog/2021/03/19/system-deploying/">https://gkfat.github.io/gk-blog/2021/03/19/system-deploying/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Gk</p></div></div><div class="level-item is-narrow"><div><h6>發表於</h6><p>2021-03-19</p></div></div><div class="level-item is-narrow"><div><h6>更新於</h6><p>2021-03-19</p></div></div><div class="level-item is-narrow"><div><h6>許可協議</h6><p><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="icon" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a><a class="icon" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/gk-blog/tags/fullStack/">fullStack</a></div><!--!--></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜歡這篇文章嗎? 贊助一下作者吧!</h3><div class="buttons is-centered"></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/gk-blog/2020/05/16/linux-journalctl/"><span class="level-item">Linux 學習筆記 - Journalctl</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">評論</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'https://gkfat.github.io/gk-blog/2021/03/19/system-deploying/';
+            this.page.identifier = '2021/03/19/system-deploying/';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');  
+            s.src = '//' + 'visitor' + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/gk-blog/img/gkfat.png" alt="Gk"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Gk</p><p class="is-size-6 is-block">Web Front-End Developer</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Taipei, Taiwan</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/gk-blog/archives"><p class="title">22</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分類</p><a href="/gk-blog/categories"><p class="title">0</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">標籤</p><a href="/gk-blog/tags"><p class="title">28</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/gkfat" target="_blank" rel="noopener">追蹤</a></div><div class="level is-mobile"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/gkfat"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Facebook" href="https://www.linkedin.com/in/gkgkwang"><i class="fab fa-linkedin"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Twitter" href="https://anchor.fm/glhffreestyletalk"><i class="fas fa-podcast"></i></a></div></div></div><!--!--><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-03-19T14:00:35.000Z">2021-03-19</time></p><p class="title"><a href="/gk-blog/2021/03/19/system-deploying/">前後端＆資料庫系統建置心得</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2020-05-16T03:19:06.420Z">2020-05-16</time></p><p class="title"><a href="/gk-blog/2020/05/16/linux-journalctl/">Linux 學習筆記 - Journalctl</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2020-04-19T09:04:55.428Z">2020-04-19</time></p><p class="title"><a href="/gk-blog/2020/04/19/linux-systemctl/">Linux 學習筆記 - Systemd</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2020-01-26T10:27:41.000Z">2020-01-26</time></p><p class="title"><a href="/gk-blog/2020/01/26/self-manage/">自我管理心法（一）：為什麼要自我管理？</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2019-12-22T08:30:14.000Z">2019-12-22</time></p><p class="title"><a href="/gk-blog/2019/12/22/web-http/">Web 學習筆記 - HTTP</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">彙整</h3><ul class="menu-list"><li><a class="level is-mobile" href="/gk-blog/archives/2021/03/"><span class="level-start"><span class="level-item">三月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/gk-blog/archives/2020/05/"><span class="level-start"><span class="level-item">五月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/gk-blog/archives/2020/04/"><span class="level-start"><span class="level-item">四月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/gk-blog/archives/2020/01/"><span class="level-start"><span class="level-item">一月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/gk-blog/archives/2019/12/"><span class="level-start"><span class="level-item">十二月 2019</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/gk-blog/archives/2019/10/"><span class="level-start"><span class="level-item">十月 2019</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/gk-blog/archives/2019/09/"><span class="level-start"><span class="level-item">九月 2019</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li><li><a class="level is-mobile" href="/gk-blog/archives/2019/06/"><span class="level-start"><span class="level-item">六月 2019</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">標籤</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/gk-blog/tags/Ajax/"><span class="tag">Ajax</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/Angular/"><span class="tag">Angular</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/Career/"><span class="tag">Career</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">9</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/Journalctl/"><span class="tag">Journalctl</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/LifeCycle/"><span class="tag">LifeCycle</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/Linux/"><span class="tag">Linux</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/Node-js/"><span class="tag">Node.js</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/Systemctl/"><span class="tag">Systemctl</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/Systemd/"><span class="tag">Systemd</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/XMLHttpRequest/"><span class="tag">XMLHttpRequest</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/class/"><span class="tag">class</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/closure/"><span class="tag">closure</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/cookie/"><span class="tag">cookie</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/fullStack/"><span class="tag">fullStack</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/git/"><span class="tag">git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/hexo/"><span class="tag">hexo</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/hoisting/"><span class="tag">hoisting</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/html/"><span class="tag">html</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/http/"><span class="tag">http</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/localStorage/"><span class="tag">localStorage</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/nginx/"><span class="tag">nginx</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/prototype/"><span class="tag">prototype</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/session/"><span class="tag">session</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/sessionStorage/"><span class="tag">sessionStorage</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/vue-js/"><span class="tag">vue.js</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/web/"><span class="tag">web</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/gk-blog/tags/%E8%87%AA%E6%88%91%E7%AE%A1%E7%90%86/"><span class="tag">自我管理</span><span class="tag">1</span></a></div></div></div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">訂閱 Email</h3><form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open(&#039;https://feedburner.google.com/fb/a/mailverify?uri=&#039;,&#039;popupwindow&#039;,&#039;scrollbars=yes,width=550,height=520&#039;);return true"><input type="hidden" value="" name="uri"><input type="hidden" name="loc" value="en_US"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="訂閱"></div></div></form></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/gk-blog/"><img src="/gk-blog/img/avatar.png" alt="Gk&#039;s blog" height="28"></a><p class="is-size-7"><span>&copy; 2021 Gk</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>個訪客</span></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" async></script><script>moment.locale("zh-TW");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/gk-blog/js/column.js"></script><script src="/gk-blog/js/animation.js"></script><a id="back-to-top" title="回到頁首" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/gk-blog/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此網站使用Cookie來改善您的體驗。",
+          dismiss: "知道了！",
+          allow: "允許使用Cookie",
+          deny: "拒絕",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/gk-blog/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="請輸入關鍵字..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/gk-blog/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/gk-blog/content.json"}, {"hint":"請輸入關鍵字...","untitled":"(無標題)","posts":"文章","pages":"頁面","categories":"分類","tags":"標籤"});
+        });</script></body></html>
