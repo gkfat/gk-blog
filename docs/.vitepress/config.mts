@@ -5,11 +5,11 @@ import { programmingItems } from '../programming/sidebar.mts';
 
 export default defineConfig({
   title: "Gk's Notebook",
+  description: '基於 vitepress 的技術筆記',
+
   base: '/',
 
   lastUpdated: true,
-
-  description: '基於 vitepress 的技術筆記',
 
   themeConfig: {
     nav: [
@@ -22,12 +22,6 @@ export default defineConfig({
     outline: [2, 4],
 
     sidebar: [
-      {
-        text: '為什麼要寫技術筆記',
-        base: '/',
-        collapsed: false,
-        items: [{ text: 'Intro', link: 'index' }],
-      },
       {
         text: '心法',
         base: '/mind/',
