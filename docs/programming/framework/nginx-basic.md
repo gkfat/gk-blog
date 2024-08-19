@@ -35,7 +35,7 @@ $ nginx -s reload
 $ sudo nginx -s stop
 ```
 
-打開 http://localhost:8080，就會看到 Nginx 在跟你招手了！
+打開 `http://localhost:8080`，就會看到 Nginx 在跟你招手了！
 
 ## 配置
 
