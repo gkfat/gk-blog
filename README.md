@@ -1,8 +1,4 @@
----
-title: Gk's Notebook
----
-
-# 為什麼要寫技術筆記
+# Gk's Notebook
 
 技術筆記：https://gk-blog.pages.dev
 
