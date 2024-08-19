@@ -7,6 +7,22 @@ export default defineConfig({
   title: "Gk's Notebook",
   description: '基於 vitepress 的技術筆記',
 
+  head: [
+    // Google Analytics
+    [
+      'script',
+      {
+        async: 'true',
+        src: 'https://www.googletagmanager.com/gtag/js?id=G-L7WDFFEZLC',
+      },
+    ],
+    [
+      'script',
+      {},
+      "window.dataLayer = window.dataLayer || [];\nfunction gtag(){dataLayer.push(arguments);}\ngtag('js', new Date());\ngtag('config', 'G-L7WDFFEZLC');",
+    ],
+  ],
+
   base: '/',
 
   lastUpdated: true,
