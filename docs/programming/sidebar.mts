@@ -122,6 +122,10 @@ export const programmingItems: DefaultTheme.SidebarItem[] = [
         text: '專案筆記 - 來寫一個串接 NAS 的檔案管理服務吧！',
         link: 'project-file-upload-service',
       },
+      {
+        text: '專案筆記 - 打造一個基於 VitePress 的技術筆記',
+        link: 'project-build-blog-based-on-vitepress',
+      },
     ],
   },
   {
