@@ -113,7 +113,7 @@ Node.js 本身的 node_modules 就提供了相當多的套件可以使用，隨�
 
 而在部署時，並不需要將這些套件一起打包，只要在 config.json 的 dependencies 註明清楚，就可以透過 npm install 來安裝所有需要的套件包了。
 
-## 開始 Node.s！
+## 開始 Node.js！
 
 ### “Hello World”
 
