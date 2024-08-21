@@ -3,7 +3,15 @@ layout: doc
 
 title: Web 學習筆記 - HTML vs HTML5
 
-description: 我剛開始接觸網頁前端的時候，因為有太多東西要學了，就一頭栽下去學，總之先熟悉再說。忘記從什麼時候開始，這個疑問就懸在心頭：HTML 等於 HTML5 嗎？
+description: 剛開始接觸網頁前端的時候，因為有太多東西要學了，就一頭栽下去學，總之先熟悉再說。忘記從什麼時候開始，這個疑問就懸在心頭：HTML 等於 HTML5 嗎？
+
+head:
+  - - meta
+    - property: og:title
+      content: Web 學習筆記 - localStorage / sessionStorage / cookie / session 比較
+  - - meta
+    - property: og:description
+      content: 剛開始接觸網頁前端的時候，因為有太多東西要學了，就一頭栽下去學，總之先熟悉再說。忘記從什麼時候開始，這個疑問就懸在心頭：HTML 等於 HTML5 嗎？
 ---
 
 # {{ $frontmatter.title }}

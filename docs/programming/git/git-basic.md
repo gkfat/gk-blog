@@ -4,6 +4,14 @@ layout: doc
 title: Git 學習筆記 - 如何使用 Git 做版本控制
 
 description: 身為一位工程師，版本控制的重要性就應該刻在你的靈魂深處。不做版控，表示你必需冒著風險修復更動程式碼之後出現的 bug，也代表你的網站被攻擊之後，沒辦法恢復到原來的狀態。
+
+head:
+  - - meta
+    - property: og:title
+      content: Git 學習筆記 - 如何使用 Git 做版本控制
+  - - meta
+    - property: og:description
+      content: 身為一位工程師，版本控制的重要性就應該刻在你的靈魂深處。不做版控，表示你必需冒著風險修復更動程式碼之後出現的 bug，也代表你的網站被攻擊之後，沒辦法恢復到原來的狀態。
 ---
 
 # {{ $frontmatter.title }}

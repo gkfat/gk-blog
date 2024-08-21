@@ -4,6 +4,14 @@ layout: doc
 title: JavaScript 學習筆記 - ES5 vs ES6
 
 description: 學習 JavaScript 一段時間了，也逐漸熟悉各種語法的運用，覺得差不多可以更深一層地認識這個語言了。因此趁此機會，就來整理一篇筆記，探討 ES5 與 ES6 之間的差異。
+
+head:
+  - - meta
+    - property: og:title
+      content: JavaScript 學習筆記 - ES5 vs ES6
+  - - meta
+    - property: og:description
+      content: 學習 JavaScript 一段時間了，也逐漸熟悉各種語法的運用，覺得差不多可以更深一層地認識這個語言了。因此趁此機會，就來整理一篇筆記，探討 ES5 與 ES6 之間的差異。
 ---
 
 # {{ $frontmatter.title }}

@@ -4,6 +4,14 @@ layout: doc
 title: TypeScript 學習筆記 - 初探
 
 description: 因為專案使用 Angular 的關係，我在開發上逐漸習慣都使用 TypeScript，甚至連近期在練習使用 Node.js 寫後端專案，也會盡可能使用 TypeScript。用習慣了之後，再回去看原生的 JavaScript，總是會感到渾身不對勁。
+
+head:
+  - - meta
+    - property: og:title
+      content: TypeScript 學習筆記 - 初探
+  - - meta
+    - property: og:description
+      content: 因為專案使用 Angular 的關係，我在開發上逐漸習慣都使用 TypeScript，甚至連近期在練習使用 Node.js 寫後端專案，也會盡可能使用 TypeScript。用習慣了之後，再回去看原生的 JavaScript，總是會感到渾身不對勁。
 ---
 
 # {{ $frontmatter.title }}
@@ -16,7 +24,7 @@ description: 因為專案使用 Angular 的關係，我在開發上逐漸習慣�
 
 ## 什麼是 TypeScript？
 
-> 一言以蔽之，就是「基於 JavaScript，但能夠定義型別」的程式語言。
+> 一言以蔽之，就是「基於 JavaScript，但能夠定義型別」的開發輔助工具。
 
 當一段程式碼在 `JavaScript` 長這樣：
 

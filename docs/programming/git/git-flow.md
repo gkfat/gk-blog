@@ -4,6 +4,14 @@ layout: doc
 title: Git 學習筆記 - 掌控你的 Git flow
 
 description: 在前端的路途上，因為技術觀念尚不扎實，常常都是先做了再說，因此時常會遇到「咦？這個觀念不是跟我平常在用的 XXX 一樣嗎？」的情況，這次要討論的主題 Git Flow 正是其中之一。
+
+head:
+  - - meta
+    - property: og:title
+      content: Git 學習筆記 - 掌控你的 Git flow
+  - - meta
+    - property: og:description
+      content: 在前端的路途上，因為技術觀念尚不扎實，常常都是先做了再說，因此時常會遇到「咦？這個觀念不是跟我平常在用的 XXX 一樣嗎？」的情況，這次要討論的主題 Git Flow 正是其中之一。
 ---
 
 # {{ $frontmatter.title }}

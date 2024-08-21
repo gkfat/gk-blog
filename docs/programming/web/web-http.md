@@ -4,6 +4,14 @@ layout: doc
 title: Web 學習筆記 - HTTP
 
 description: HTTP（HyperText Transfer Protocol）可說是學習 Web 知識的基本，不僅如此，他還是基本中的基本。因為接著要接觸到 WebSocket，必須先加深網路基礎知識，才能一步步攻破。
+
+head:
+  - - meta
+    - property: og:title
+      content: Web 學習筆記 - HTTP
+  - - meta
+    - property: og:description
+      content: HTTP（HyperText Transfer Protocol）可說是學習 Web 知識的基本，不僅如此，他還是基本中的基本。因為接著要接觸到 WebSocket，必須先加深網路基礎知識，才能一步步攻破。
 ---
 
 # {{ $frontmatter.title }}

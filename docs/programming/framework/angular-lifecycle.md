@@ -4,6 +4,14 @@ layout: doc
 title: Angular 學習筆記 - 生命週期
 
 description: 既然 Vue 有一堆生命週期，那想當然 Angular 應該也有吧？除了最常用到的 ngOnInit 之外，來瞭解看看其他生命週期階段，能幫助我們在寫扣時更完整地去控制一個元件在各階段應該對資料有什麼反應。
+
+head:
+  - - meta
+    - property: og:title
+      content: Angular 學習筆記 - 生命週期
+  - - meta
+    - property: og:description
+      content: 既然 Vue 有一堆生命週期，那想當然 Angular 應該也有吧？除了最常用到的 ngOnInit 之外，來瞭解看看其他生命週期階段，能幫助我們在寫扣時更完整地去控制一個元件在各階段應該對資料有什麼反應。
 ---
 
 # {{ $frontmatter.title }}

@@ -4,6 +4,14 @@ layout: doc
 title: Linux 學習筆記 - Systemctl
 
 description: 有時難免會碰到網站掛掉，找到問題後發現是後端服務出錯的情況。身為純前端，這時通常會手足無措，因為必須等後端修復之後，才能回報 user。此時如果前端工程師能自行進入後端環境，做一些基本的偵錯處理，是否就能提升效率呢？
+
+head:
+  - - meta
+    - property: og:title
+      content: Linux 學習筆記 - Systemctl
+  - - meta
+    - property: og:description
+      content: 有時難免會碰到網站掛掉，找到問題後發現是後端服務出錯的情況。身為純前端，這時通常會手足無措，因為必須等後端修復之後，才能回報 user。此時如果前端工程師能自行進入後端環境，做一些基本的偵錯處理，是否就能提升效率呢？
 ---
 
 # {{ $frontmatter.title }}

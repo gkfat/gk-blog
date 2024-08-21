@@ -4,6 +4,14 @@ layout: doc
 title: JavaScript 學習筆記 - Prototype 與 Class
 
 description: 我認為這兩個概念放一起討論會比較好融會貫通，因此整理成同一篇。關於為什麼 JS 需要有繼承與原型鏈，網路上有很多文章在說明緣由，我就不再贅述了。
+
+head:
+  - - meta
+    - property: og:title
+      content: JavaScript 學習筆記 - Promise
+  - - meta
+    - property: og:description
+      content: 我認為這兩個概念放一起討論會比較好融會貫通，因此整理成同一篇。關於為什麼 JS 需要有繼承與原型鏈，網路上有很多文章在說明緣由，我就不再贅述了。
 ---
 
 # {{ $frontmatter.title }}

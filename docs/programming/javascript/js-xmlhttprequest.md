@@ -3,7 +3,15 @@ layout: doc
 
 title: JavaScript 學習筆記 - XMLHttpRequest
 
-description: 我剛開始接觸網頁前端的時候，因為有太多東西要學了，就一頭栽下去學，總之先熟悉再說。忘記從什麼時候開始，這個疑問就懸在心頭：HTML 等於 HTML5 嗎？
+description: 學習程式以來碰到一個較難突破的關檻，就是「如何向 server 發送要求」。到目前為止常見的方法有三種：JQuery、fetch、axios，但我想先了解背後的運作原理，以及用原生 JS 如何實現，之後再去使用方便快速的方法。
+
+head:
+  - - meta
+    - property: og:title
+      content: JavaScript 學習筆記 - XMLHttpRequest
+  - - meta
+    - property: og:description
+      content: 學習程式以來碰到一個較難突破的關檻，就是「如何向 server 發送要求」。到目前為止常見的方法有三種：JQuery、fetch、axios，但我想先了解背後的運作原理，以及用原生 JS 如何實現，之後再去使用方便快速的方法。
 ---
 
 # {{ $frontmatter.title }}
@@ -19,6 +27,7 @@ description: 我剛開始接觸網頁前端的時候，因為有太多東西要�
 - 用 axios 實現
 
 但我的想法是想先了解背後的運作原理，以及用原生 JS 如何實現，之後再去使用方便快速的方法。
+
 很多免費資源都可以在 YouTube 上搜尋到，例如這一個頻道： [Traversy Media](https://www.youtube.com/user/TechGuyWeb)，他在這支影片裡就帶著你用原生 JS 操作 XMLHttpRequest：https://www.youtube.com/watch?v=82hnvUYY6QA
 
 ## XMLHttpRequest

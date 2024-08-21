@@ -8,7 +8,7 @@ export default defineConfig({
   description: '基於 vitepress 的技術筆記',
 
   head: [
-    ['link', { rel: 'icon', href: '/favicon.ico' }],
+    ['link', { rel: 'icon', href: 'https://gk-blog.pages.dev/favicon.ico' }],
     ['meta', { property: 'og:title', content: "GK's Notebook" }],
     [
       'meta',
