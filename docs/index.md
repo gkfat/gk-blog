@@ -1,4 +1,6 @@
 ---
+layout: doc
+
 title: Gk's Notebook
 ---
 
