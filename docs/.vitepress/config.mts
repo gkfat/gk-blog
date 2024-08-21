@@ -8,6 +8,20 @@ export default defineConfig({
   description: '基於 vitepress 的技術筆記',
 
   head: [
+    ['link', { rel: 'icon', href: '/favicon.ico' }],
+    ['meta', { property: 'og:title', content: "GK's Notebook" }],
+    [
+      'meta',
+      { property: 'og:description', content: '基於 VitePress 的技術筆記' },
+    ],
+    [
+      'meta',
+      {
+        property: 'og:image',
+        content: 'https://gk-blog.pages.dev/ogimage.png',
+      },
+    ],
+    ['meta', { property: 'og:url', content: 'https://gk-blog.pages.dev' }],
     // Google Analytics
     [
       'script',
