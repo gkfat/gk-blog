@@ -79,6 +79,10 @@ export const programmingItems: DefaultTheme.SidebarItem[] = [
         text: 'JavaScript 學習筆記 - Ajax',
         link: 'js-ajax',
       },
+      {
+        text: 'JavaScript 學習筆記 - Promise',
+        link: 'js-promise',
+      },
     ],
   },
   {
