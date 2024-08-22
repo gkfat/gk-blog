@@ -2,12 +2,12 @@ import { DefaultTheme } from 'vitepress';
 
 export const programmingItems: DefaultTheme.SidebarItem[] = [
   {
-    text: 'Theory',
-    base: '/programming/theory/',
+    text: 'System Design',
+    base: '/programming/system-design/',
     collapsed: true,
     items: [
       {
-        text: 'OOP 學習筆記 - 什麼是物件導向程式設計？跟前端開發有什麼關係？',
+        text: '系統設計學習筆記 - 什麼是物件導向程式設計(OOP)？跟前端開發有什麼關係？',
         link: 'oop-basic',
       },
     ],
