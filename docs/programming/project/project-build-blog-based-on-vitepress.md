@@ -3,7 +3,7 @@ layout: doc
 
 title: 專案筆記 - 打造一個基於 VitePress 的技術筆記
 
-description: 機緣巧合下，我接到了個任務，需要把一套系統在一個新建的 Server 上架起來。盤點手上資源，是幾套程式碼，還有前人遺留在各 Server 的設定檔。我是剛轉職一年的前端工程師，對前端領域可說是才剛有一些心得，現在就來了這個任務…好吧！解就解，誰怕誰（反正有 Stack Overflow）！
+description: 自 2019 轉職工程師以來，就累積了一些技術筆記。原本是用 Hexo 框架，架在 github pages 上，但因為在 2024-03-21 時，VitePress 釋出了 `v1.0.0` 正式版，近幾年跟 Vue 比較熟的我就趕快研究了一下，想把部落格搬過來。
 
 head:
   - - meta
@@ -11,7 +11,7 @@ head:
       content: 專案筆記 - 打造一個基於 VitePress 的技術筆記
   - - meta
     - property: og:description
-      content: 機緣巧合下，我接到了個任務，需要把一套系統在一個新建的 Server 上架起來。盤點手上資源，是幾套程式碼，還有前人遺留在各 Server 的設定檔。我是剛轉職一年的前端工程師，對前端領域可說是才剛有一些心得，現在就來了這個任務…好吧！解就解，誰怕誰（反正有 Stack Overflow）！
+      content: 自 2019 轉職工程師以來，就累積了一些技術筆記。原本是用 Hexo 框架，架在 github pages 上，但因為在 2024-03-21 時，VitePress 釋出了 `v1.0.0` 正式版，近幾年跟 Vue 比較熟的我就趕快研究了一下，想把部落格搬過來。
 ---
 
 # {{ $frontmatter.title }}
