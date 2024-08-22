@@ -8,12 +8,42 @@ export default defineConfig({
   description: '基於 vitepress 的技術筆記',
 
   head: [
-    ['link', { rel: 'icon', href: 'https://gk-blog.pages.dev/favicon.ico' }],
-    ['meta', { property: 'og:title', content: "GK's Notebook" }],
+    ['link', { rel: 'icon', href: '/favicon.ico' }],
+
+    // Apple touch icon
     [
-      'meta',
-      { property: 'og:description', content: '基於 VitePress 的技術筆記' },
+      'link',
+      {
+        rel: 'apple-touch-icon',
+        sizes: '180x180',
+        href: '/apple-touch-icon.png',
+      },
     ],
+
+    // Android Chrome icon
+    [
+      'link',
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '192x192',
+        href: '/android-chrome-192x192.png',
+      },
+    ],
+    [
+      'link',
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '512x512',
+        href: '/android-chrome-512x512.png',
+      },
+    ],
+
+    // Web 應用清單文件
+    ['link', { rel: 'manifest', href: '/site.webmanifest' }],
+
+    ['meta', { property: 'og:type', content: 'website' }],
     [
       'meta',
       {
@@ -36,8 +66,6 @@ export default defineConfig({
       "window.dataLayer = window.dataLayer || [];\nfunction gtag(){dataLayer.push(arguments);}\ngtag('js', new Date());\ngtag('config', 'G-L7WDFFEZLC');",
     ],
   ],
-
-  base: '/',
 
   lastUpdated: true,
 
