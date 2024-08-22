@@ -145,6 +145,10 @@ export const programmingItems: DefaultTheme.SidebarItem[] = [
         text: 'DevOps 學習筆記 - AzurePipelines、Docker、GCP',
         link: 'devops-azurepipelines-gcp',
       },
+      {
+        text: 'DevOps 學習筆記 - 用 Docker 建立本地開發環境',
+        link: 'devops-docker',
+      },
     ],
   },
 ];

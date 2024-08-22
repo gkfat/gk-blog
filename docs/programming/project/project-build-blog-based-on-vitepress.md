@@ -116,6 +116,6 @@ $ pnpm run docs:dev
 
 ---
 
-參考資料：
+## 參考資料
 
 - [VitePress 官方文件](https://vitepress.dev)
