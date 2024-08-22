@@ -10,6 +10,10 @@ export const programmingItems: DefaultTheme.SidebarItem[] = [
         text: '系統設計學習筆記 - 什麼是物件導向程式設計(OOP)？跟前端開發有什麼關係？',
         link: 'oop-basic',
       },
+      {
+        text: '系統計學習筆記 - 領域驅動設計 Domain-Driven Design(DDD)',
+        link: 'ddd-basic',
+      },
     ],
   },
   {
