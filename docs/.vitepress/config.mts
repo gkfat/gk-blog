@@ -63,7 +63,20 @@ export default defineConfig({
     [
       'script',
       {},
-      "window.dataLayer = window.dataLayer || [];\nfunction gtag(){dataLayer.push(arguments);}\ngtag('js', new Date());\ngtag('config', 'G-N57JYNE2HQ');",
+      `window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-N57JYNE2HQ');`,
+    ],
+    // Google Adsense
+    [
+      'script',
+      {
+        async: 'true',
+        src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1090214244318718"',
+        crossorigin: 'anonymous',
+      },
     ],
   ],
 
