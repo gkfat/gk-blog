@@ -14,6 +14,10 @@ export const programmingItems: DefaultTheme.SidebarItem[] = [
         text: '系統計學習筆記 - 領域驅動設計 Domain-Driven Design(DDD)',
         link: 'ddd-basic',
       },
+      {
+        text: '系統計學習筆記 - 搞懂 OAuth（開放授權） 與 SSO（單點登錄） ',
+        link: 'oauth-vs-sso',
+      },
     ],
   },
   {
