@@ -7,6 +7,7 @@ import { mindItems } from '../mind/sidebar.mts';
 import { programmingItems } from '../programming/sidebar.mts';
 
 export default defineConfig({
+  title: "GK's 技術筆記",
   transformHead: ({ pageData }) => {
     const head: HeadConfig[] = [
       ['link', { rel: 'icon', href: '/favicon.ico' }],
