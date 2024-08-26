@@ -4,14 +4,6 @@ layout: doc
 title: JavaScript 學習筆記 - XMLHttpRequest
 
 description: 學習程式以來碰到一個較難突破的關檻，就是「如何向 server 發送要求」。到目前為止常見的方法有三種：JQuery、fetch、axios，但我想先了解背後的運作原理，以及用原生 JS 如何實現，之後再去使用方便快速的方法。
-
-head:
-  - - meta
-    - property: og:title
-      content: JavaScript 學習筆記 - XMLHttpRequest
-  - - meta
-    - property: og:description
-      content: 學習程式以來碰到一個較難突破的關檻，就是「如何向 server 發送要求」。到目前為止常見的方法有三種：JQuery、fetch、axios，但我想先了解背後的運作原理，以及用原生 JS 如何實現，之後再去使用方便快速的方法。
 ---
 
 # {{ $frontmatter.title }}

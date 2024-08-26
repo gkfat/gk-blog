@@ -4,14 +4,6 @@ layout: doc
 title: Road to Front-End Developer
 
 description: 當我還是個稚嫩的高中生時，我非常討厭電腦課教的程式語言（C++／VB），認為這輩子都跟程式絕緣。殊不知在日新月異的前端領域中，我找到了比設計、文案更巨大的成就感。下定決心轉職的幾個月後，我已經找到一份前端工程師的工作了。
-
-head:
-  - - meta
-    - property: og:title
-      content: Road to Front-End Developer
-  - - meta
-    - property: og:description
-      content: 當我還是個稚嫩的高中生時，我非常討厭電腦課教的程式語言（C++／VB），認為這輩子都跟程式絕緣。殊不知在日新月異的前端領域中，我找到了比設計、文案更巨大的成就感。下定決心轉職的幾個月後，我已經找到一份前端工程師的工作了。
 ---
 
 # {{ $frontmatter.title }}

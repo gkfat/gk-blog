@@ -4,14 +4,6 @@ layout: doc
 title: 系統設計學習筆記 - 搞懂 OAuth（開放授權） 與 SSO（單點登錄）
 
 description: '程式開發的過程中，卡關滿久的就是 OAuth 驗證，一直沒有真正搞懂背後的運作原理，也還沒試著實作它。最近感覺時候到了，就認真讀點書，把相關知識補起來，順便了解一下 SSO 跟 OAuth 的差別。'
-
-head:
-  - - meta
-    - property: og:title
-      content: 系統設計學習筆記 - 搞懂 OAuth（開放授權） 與 SSO（單點登錄）
-  - - meta
-    - property: og:description
-      content: '程式開發的過程中，卡關滿久的就是 OAuth 驗證，一直沒有真正搞懂背後的運作原理，也還沒試著實作它。最近感覺時候到了，就認真讀點書，把相關知識補起來，順便了解一下 SSO 跟 OAuth 的差別。'
 ---
 
 # {{ $frontmatter.title }}

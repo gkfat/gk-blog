@@ -1,84 +1,105 @@
-import { defineConfig } from 'vitepress';
+import {
+    defineConfig,
+    HeadConfig,
+} from 'vitepress';
 
 import { mindItems } from '../mind/sidebar.mts';
 import { programmingItems } from '../programming/sidebar.mts';
 
 export default defineConfig({
-  title: "Gk's Notebook",
-  description: '基於 vitepress 的技術筆記',
+  transformHead: ({ pageData }) => {
+    const head: HeadConfig[] = [
+      ['link', { rel: 'icon', href: '/favicon.ico' }],
 
-  head: [
-    ['link', { rel: 'icon', href: '/favicon.ico' }],
+      // Apple touch icon
+      [
+        'link',
+        {
+          rel: 'apple-touch-icon',
+          sizes: '180x180',
+          href: '/apple-touch-icon.png',
+        },
+      ],
 
-    // Apple touch icon
-    [
-      'link',
-      {
-        rel: 'apple-touch-icon',
-        sizes: '180x180',
-        href: '/apple-touch-icon.png',
-      },
-    ],
+      // Android Chrome icon
+      [
+        'link',
+        {
+          rel: 'icon',
+          type: 'image/png',
+          sizes: '192x192',
+          href: '/android-chrome-192x192.png',
+        },
+      ],
+      [
+        'link',
+        {
+          rel: 'icon',
+          type: 'image/png',
+          sizes: '512x512',
+          href: '/android-chrome-512x512.png',
+        },
+      ],
 
-    // Android Chrome icon
-    [
-      'link',
-      {
-        rel: 'icon',
-        type: 'image/png',
-        sizes: '192x192',
-        href: '/android-chrome-192x192.png',
-      },
-    ],
-    [
-      'link',
-      {
-        rel: 'icon',
-        type: 'image/png',
-        sizes: '512x512',
-        href: '/android-chrome-512x512.png',
-      },
-    ],
+      // Web 應用清單文件
+      ['link', { rel: 'manifest', href: '/site.webmanifest' }],
 
-    // Web 應用清單文件
-    ['link', { rel: 'manifest', href: '/site.webmanifest' }],
+      ['meta', { property: 'og:type', content: 'website' }],
+      [
+        'meta',
+        {
+          property: 'og:image',
+          content: 'https://gk-blog.pages.dev/ogimage.png',
+        },
+      ],
+      ['meta', { property: 'og:url', content: 'https://gk-blog.pages.dev' }],
+      // Google Analytics
+      [
+        'script',
+        {
+          async: 'true',
+          src: 'https://www.googletagmanager.com/gtag/js?id=G-N57JYNE2HQ',
+        },
+      ],
+      [
+        'script',
+        {},
+        `window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-    ['meta', { property: 'og:type', content: 'website' }],
-    [
-      'meta',
-      {
-        property: 'og:image',
-        content: 'https://gk-blog.pages.dev/ogimage.png',
-      },
-    ],
-    ['meta', { property: 'og:url', content: 'https://gk-blog.pages.dev' }],
-    // Google Analytics
-    [
-      'script',
-      {
-        async: 'true',
-        src: 'https://www.googletagmanager.com/gtag/js?id=G-N57JYNE2HQ',
-      },
-    ],
-    [
-      'script',
-      {},
-      `window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+        gtag('config', 'G-N57JYNE2HQ');`,
+      ],
+      // Google Adsense
+      [
+        'script',
+        {
+          async: 'true',
+          src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1090214244318718"',
+          crossorigin: 'anonymous',
+        },
+      ],
+    ];
 
-      gtag('config', 'G-N57JYNE2HQ');`,
-    ],
-    // Google Adsense
-    [
-      'script',
-      {
-        async: 'true',
-        src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1090214244318718"',
-        crossorigin: 'anonymous',
-      },
-    ],
-  ],
+    if (pageData.frontmatter.title) {
+      head.push([
+        'meta',
+        { property: 'og:title', content: pageData.frontmatter.title },
+      ]);
+    }
+
+    if (pageData.frontmatter.description) {
+      head.push([
+        'meta',
+        {
+          property: 'og:description',
+          content: pageData.frontmatter.description,
+        },
+      ]);
+    }
+
+    return head;
+  },
 
   lastUpdated: true,
 

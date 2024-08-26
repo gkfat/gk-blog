@@ -4,14 +4,6 @@ layout: doc
 title: DevOps 學習筆記 - 用 Docker 建立本地開發環境
 
 description: 工作上使用 Docker 開發也有些時日了，不知不覺就熟悉了 DockerFile、 Docker Compose，這篇就來整理一下用法。
-
-head:
-  - - meta
-    - property: og:title
-      content: DevOps 學習筆記 - 用 Docker 建立本地開發環境
-  - - meta
-    - property: og:description
-      content: 工作上使用 Docker 開發也有些時日了，不知不覺就熟悉了 DockerFile、 Docker Compose，這篇就來整理一下用法。
 ---
 
 # {{ $frontmatter.title }}

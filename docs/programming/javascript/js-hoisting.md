@@ -4,14 +4,6 @@ layout: doc
 title: JavaScript 學習筆記 - Hoisting
 
 description: JavaScript 這語言在某些時候並不是很嚴謹，所以特別去了解那些奇怪的部分，能夠大幅減少莫名其妙卡住的除錯時間。
-
-head:
-  - - meta
-    - property: og:title
-      content: JavaScript 學習筆記 - Hoisting
-  - - meta
-    - property: og:description
-      content: JavaScript 這語言在某些時候並不是很嚴謹，所以特別去了解那些奇怪的部分，能夠大幅減少莫名其妙卡住的除錯時間。
 ---
 
 # {{ $frontmatter.title }}

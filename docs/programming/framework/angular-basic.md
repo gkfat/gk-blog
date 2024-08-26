@@ -4,14 +4,6 @@ layout: doc
 title: Angular 學習筆記 - 從頭認識一個框架
 
 description: 因為公司專案使用 Angular，為了能夠駕馭，就義無反顧地投入下去從頭學起啦！Angular 真的是個學習曲線很高的框架，規範相當嚴謹，但相對來說，前面規範細一點，後續維護就方便些，在這方面確實是比 Vue 有更多優勢的。
-
-head:
-  - - meta
-    - property: og:title
-      content: Angular 學習筆記 - 從頭認識一個框架
-  - - meta
-    - property: og:description
-      content: 因為公司專案使用 Angular，為了能夠駕馭，就義無反顧地投入下去從頭學起啦！Angular 真的是個學習曲線很高的框架，規範相當嚴謹，但相對來說，前面規範細一點，後續維護就方便些，在這方面確實是比 Vue 有更多優勢的。
 ---
 
 # {{ $frontmatter.title }}

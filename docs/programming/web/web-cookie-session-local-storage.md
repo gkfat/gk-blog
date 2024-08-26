@@ -4,14 +4,6 @@ layout: doc
 title: Web 學習筆記 - localStorage / sessionStorage / cookie / session 比較
 
 description: 這幾個東西有什麼不同？這是面試很常出現的基礎題，也是前端新手（*例如我）很容易霧煞煞的部分。為了加深印象，我決定來整理一篇筆記。
-
-head:
-  - - meta
-    - property: og:title
-      content: Web 學習筆記 - localStorage / sessionStorage / cookie / session 比較
-  - - meta
-    - property: og:description
-      content: 這幾個東西有什麼不同？這是面試很常出現的基礎題，也是前端新手（*例如我）很容易霧煞煞的部分。為了加深印象，我決定來整理一篇筆記。
 ---
 
 # {{ $frontmatter.title }}

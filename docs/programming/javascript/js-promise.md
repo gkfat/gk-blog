@@ -4,14 +4,6 @@ layout: doc
 title: JavaScript 學習筆記 - Promise
 
 description: JavaScript 是個一條腸子通到底單線程語言，但許多情境下都需要處理非同步的請求，而我們又不確定這個請求什麼時候會得到回應（或者沒有回應）。這時候就會很希望有人可以給我們一個承諾，當諾言實現的時候我們再去處理它，這個承諾就是 Promise。
-
-head:
-  - - meta
-    - property: og:title
-      content: JavaScript 學習筆記 - Promise
-  - - meta
-    - property: og:description
-      content: JavaScript 是個一條腸子通到底單線程語言，但許多情境下都需要處理非同步的請求，而我們又不確定這個請求什麼時候會得到回應（或者沒有回應）。這時候就會很希望有人可以給我們一個承諾，當諾言實現的時候我們再去處理它，這個承諾就是 Promise。
 ---
 
 # {{ $frontmatter.title }}

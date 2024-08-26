@@ -4,14 +4,6 @@ layout: doc
 title: 領域驅動設計 Domain-Driven Design(DDD)
 
 description: 接觸程式開發數年，碰到過幾次不只是需要把程式碼寫出來能跑能走就可以的情況，而是必須先規劃好一個系統的藍圖，開發則是最後的部分。在思維方面，除了基本的 MVC 架構，還可以再往上探討何謂領域驅動設計。
-
-head:
-  - - meta
-    - property: og:title
-      content: 領域驅動設計 Domain-Driven Design(DDD)
-  - - meta
-    - property: og:description
-      content: 接觸程式開發數年，碰到過幾次不只是需要把程式碼寫出來能跑能走就可以的情況，而是必須先規劃好一個系統的藍圖，開發則是最後的部分。在思維方面，除了基本的 MVC 架構，還可以再往上探討何謂領域驅動設計。
 ---
 
 # {{ $frontmatter.title }}

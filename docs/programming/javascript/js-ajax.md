@@ -4,14 +4,6 @@ layout: doc
 title: JavaScript 學習筆記 - Ajax
 
 description: 為了深入學習 JavaScript，不能單單只是會使用 Ajax ，而應進一步探討 Asyncronous JavaScript And XML（不過大多數的 XML 都已被 JSON 取代）。
-
-head:
-  - - meta
-    - property: og:title
-      content: JavaScript 學習筆記 - Ajax
-  - - meta
-    - property: og:description
-      content: 為了深入學習 JavaScript，不能單單只是會使用 Ajax ，而應進一步探討 Asyncronous JavaScript And XML（不過大多數的 XML 都已被 JSON 取代）。
 ---
 
 # {{ $frontmatter.title }}

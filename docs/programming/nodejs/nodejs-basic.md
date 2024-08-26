@@ -4,14 +4,6 @@ layout: doc
 title: Node.js 學習筆記 - 初次接觸 Node.js
 
 description: 由於公司有使用 Node.js 撰寫的專案，之後有維護需求，因此對 Node.js 一竅不通的我，只好趕快惡補。
-
-head:
-  - - meta
-    - property: og:title
-      content: Node.js 學習筆記 - 初次接觸 Node.js
-  - - meta
-    - property: og:description
-      content: 由於公司有使用 Node.js 撰寫的專案，之後有維護需求，因此對 Node.js 一竅不通的我，只好趕快惡補。
 ---
 
 # {{ $frontmatter.title }}

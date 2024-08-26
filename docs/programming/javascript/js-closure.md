@@ -4,14 +4,6 @@ layout: doc
 title: JavaScript 學習筆記 - Closure
 
 description: 面試以來常常碰到的一題，就是 closure。我知道中文叫閉包，但光看字面根本猜不出意思。為了加深對 closure 的印象，而整理了這篇筆記。
-
-head:
-  - - meta
-    - property: og:title
-      content: JavaScript 學習筆記 - Closure
-  - - meta
-    - property: og:description
-      content: 面試以來常常碰到的一題，就是 closure。我知道中文叫閉包，但光看字面根本猜不出意思。為了加深對 closure 的印象，而整理了這篇筆記。
 ---
 
 # {{ $frontmatter.title }}

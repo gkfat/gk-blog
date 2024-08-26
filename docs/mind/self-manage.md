@@ -4,14 +4,6 @@ layout: doc
 title: 自我管理心法 - 為什麼要自我管理？
 
 description: 你有沒有問過自己，活這輩子，你的目標是什麼呢？你想活出怎樣的生活？想得到什麼樣的成就？你是否足夠了解自己，並且妥善管理自己的生活，讓生活的一切都在自己的掌控中？
-
-head:
-  - - meta
-    - property: og:title
-      content: 自我管理心法 - 為什麼要自我管理？
-  - - meta
-    - property: og:description
-      content: 你有沒有問過自己，活這輩子，你的目標是什麼呢？你想活出怎樣的生活？想得到什麼樣的成就？你是否足夠了解自己，並且妥善管理自己的生活，讓生活的一切都在自己的掌控中？
 ---
 
 # {{ $frontmatter.title }}

@@ -4,14 +4,6 @@ layout: doc
 title: 專案筆記 - 打造一個基於 VitePress 的技術筆記
 
 description: 自 2019 轉職工程師以來，就累積了一些技術筆記。原本是用 Hexo 框架，架在 github pages 上，但因為在 2024-03-21 時，VitePress 釋出了 `v1.0.0` 正式版，近幾年跟 Vue 比較熟的我就趕快研究了一下，想把部落格搬過來。
-
-head:
-  - - meta
-    - property: og:title
-      content: 專案筆記 - 打造一個基於 VitePress 的技術筆記
-  - - meta
-    - property: og:description
-      content: 自 2019 轉職工程師以來，就累積了一些技術筆記。原本是用 Hexo 框架，架在 github pages 上，但因為在 2024-03-21 時，VitePress 釋出了 `v1.0.0` 正式版，近幾年跟 Vue 比較熟的我就趕快研究了一下，想把部落格搬過來。
 ---
 
 # {{ $frontmatter.title }}

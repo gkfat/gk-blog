@@ -4,14 +4,6 @@ layout: doc
 title: Nginx 學習筆記 - 使用 Nginx
 
 description: 最近被主管要求使用 Nginx 來放專案的測試版本，方便跟 PM 溝通（就不用一直叫 PM 過來看我表演 ng serve，直接 build 好丟網址給他就可以測試了）。原本以為 Nginx 安裝一下改個 config 很方便，結果還是在意想不到的地方卡了一下，因此整理成筆記分享，以免有人遇到相同的問題。
-
-head:
-  - - meta
-    - property: og:title
-      content: Nginx 學習筆記 - 使用 Nginx
-  - - meta
-    - property: og:description
-      content: 最近被主管要求使用 Nginx 來放專案的測試版本，方便跟 PM 溝通（就不用一直叫 PM 過來看我表演 ng serve，直接 build 好丟網址給他就可以測試了）。原本以為 Nginx 安裝一下改個 config 很方便，結果還是在意想不到的地方卡了一下，因此整理成筆記分享，以免有人遇到相同的問題。
 ---
 
 # {{ $frontmatter.title }}

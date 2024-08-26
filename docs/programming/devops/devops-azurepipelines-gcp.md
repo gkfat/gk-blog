@@ -4,14 +4,6 @@ layout: doc
 title: DevOps 學習筆記 - AzurePipelines、Docker、GCP
 
 description: 近期在公司內接觸到了部署測試站的流程，有別於以往直接通通 `scp` 過去 VM 的暴力方式，這裡採用的是` AzurePipelines`、`Docker`、`GCP` 之間的半自動化協作，看來正在往 CI/CD 的路上發展。藉此機會，將學到的一些東西整理起來。
-
-head:
-  - - meta
-    - property: og:title
-      content: DevOps 學習筆記 - AzurePipelines、Docker、GCP
-  - - meta
-    - property: og:description
-      content: 近期在公司內接觸到了部署測試站的流程，有別於以往直接通通 `scp` 過去 VM 的暴力方式，這裡採用的是` AzurePipelines`、`Docker`、`GCP` 之間的半自動化協作，看來正在往 CI/CD 的路上發展。藉此機會，將學到的一些東西整理起來。
 ---
 
 # {{ $frontmatter.title }}

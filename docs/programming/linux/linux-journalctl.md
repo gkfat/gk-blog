@@ -4,14 +4,6 @@ layout: doc
 title: Linux 學習筆記 - Journalctl
 
 description: Systemd 裡，除了用來操作服務的 systemctl 指令，另外還有一個 journalctl 指令，能夠用各種方式查看服務執行的日誌。也就是說，這對於除錯也是很有幫助的。
-
-head:
-  - - meta
-    - property: og:title
-      content: Linux 學習筆記 - Journalctl
-  - - meta
-    - property: og:description
-      content: Systemd 裡，除了用來操作服務的 systemctl 指令，另外還有一個 journalctl 指令，能夠用各種方式查看服務執行的日誌。也就是說，這對於除錯也是很有幫助的。
 ---
 
 # {{ $frontmatter.title }}

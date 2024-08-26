@@ -4,14 +4,6 @@ layout: doc
 title: Angular 學習筆記 - RxJS
 
 description: 因為專案使用 Angular 開發，而 Angular 提供 RxJS Library 來做非同步請求的管理，身為一個前端工程師，為了讓程式碼更精簡好讀（也為了看起來更厲害），認真了解 RxJS 絕對是必要的。
-
-head:
-  - - meta
-    - property: og:title
-      content: Angular 學習筆記 - RxJS
-  - - meta
-    - property: og:description
-      content: 因為專案使用 Angular 開發，而 Angular 提供 RxJS Library 來做非同步請求的管理，身為一個前端工程師，為了讓程式碼更精簡好讀（也為了看起來更厲害），認真了解 RxJS 絕對是必要的。
 ---
 
 # {{ $frontmatter.title }}

@@ -4,14 +4,6 @@ layout: doc
 title: Road to Full-Stack Developer
 
 description: 自從 2019 轉職成前端工程師以來，已過了 5 個年頭。還記得當時的主管在公司改組時曾對我說過一句話，我一直謹記在心：不出 5 年你就會超越我了。如今已經 5 年了，舊來回顧一下自己進步多少吧。
-
-head:
-  - - meta
-    - property: og:title
-      content: Road to Full-Stack Developer
-  - - meta
-    - property: og:description
-      content: 自從 2019 轉職成前端工程師以來，已過了 5 個年頭。還記得當時的主管在公司改組時曾對我說過一句話，我一直謹記在心：不出 5 年你就會超越我了。如今已經 5 年了，舊來回顧一下自己進步多少吧。
 ---
 
 # {{ $frontmatter.title }}

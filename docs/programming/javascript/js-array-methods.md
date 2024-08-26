@@ -4,14 +4,6 @@ layout: doc
 title: JavaScript 學習筆記 - 陣列操作
 
 description: 在寫 JavaScript 時，很常會需要去操作陣列，為了加深自己對陣列操作方法的印象而整理了這一篇筆記。
-
-head:
-  - - meta
-    - property: og:title
-      content: JavaScript 學習筆記 - 陣列操作
-  - - meta
-    - property: og:description
-      content: 在寫 JavaScript 時，很常會需要去操作陣列，為了加深自己對陣列操作方法的印象而整理了這一篇筆記。
 ---
 
 # {{ $frontmatter.title }}

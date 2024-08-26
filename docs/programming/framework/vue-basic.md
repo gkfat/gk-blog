@@ -4,14 +4,6 @@ layout: doc
 title: Vue 學習筆記 - 什麼是 Vue？
 
 description: 從頭開始學習 Vue，這真的是個很方便的東西。因為是記錄給自己看的，比較不會太詳細或有系統，也不知道會有幾篇 XD。如果你想更進一步學習 Vue，建議你上網找課程，或閱讀 Vue 的官方文件。
-
-head:
-  - - meta
-    - property: og:title
-      content: Vue 學習筆記 - 什麼是 Vue？
-  - - meta
-    - property: og:description
-      content: 從頭開始學習 Vue，這真的是個很方便的東西。因為是記錄給自己看的，比較不會太詳細或有系統，也不知道會有幾篇 XD。如果你想更進一步學習 Vue，建議你上網找課程，或閱讀 Vue 的官方文件。
 ---
 
 # {{ $frontmatter.title }}

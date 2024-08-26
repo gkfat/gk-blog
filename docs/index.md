@@ -2,6 +2,8 @@
 layout: doc
 
 title: Gk's Notebook
+
+description: 基於 vitepress 的技術筆記
 ---
 
 # 為什麼要寫技術筆記
