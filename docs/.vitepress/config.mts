@@ -1,18 +1,26 @@
 import {
-    defineConfig,
-    HeadConfig,
+  defineConfig,
+  HeadConfig,
 } from 'vitepress';
 
 import { mindItems } from '../mind/sidebar.mts';
 import { programmingItems } from '../programming/sidebar.mts';
 
+const baseUrl = 'https://gk-blog.pages.dev/';
+
 export default defineConfig({
   title: "GK's 技術筆記",
   transformHead: ({ pageData }) => {
-    console.log({ pageData });
     const head: HeadConfig[] = [
       ['link', { rel: 'icon', href: '/favicon.ico' }],
       ['meta', { property: 'og:title', content: pageData.title }],
+      [
+        'meta',
+        {
+          property: 'og:url',
+          content: baseUrl + pageData.relativePath.replace('.md', ''),
+        },
+      ],
       [
         'meta',
         {
