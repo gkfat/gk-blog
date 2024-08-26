@@ -9,8 +9,17 @@ import { programmingItems } from '../programming/sidebar.mts';
 export default defineConfig({
   title: "GK's 技術筆記",
   transformHead: ({ pageData }) => {
+    console.log({ pageData });
     const head: HeadConfig[] = [
       ['link', { rel: 'icon', href: '/favicon.ico' }],
+      ['meta', { property: 'og:title', content: pageData.title }],
+      [
+        'meta',
+        {
+          property: 'og:description',
+          content: pageData.description,
+        },
+      ],
 
       // Apple touch icon
       [
@@ -81,23 +90,6 @@ export default defineConfig({
         },
       ],
     ];
-
-    if (pageData.frontmatter.title) {
-      head.push([
-        'meta',
-        { property: 'og:title', content: pageData.frontmatter.title },
-      ]);
-    }
-
-    if (pageData.frontmatter.description) {
-      head.push([
-        'meta',
-        {
-          property: 'og:description',
-          content: pageData.frontmatter.description,
-        },
-      ]);
-    }
 
     return head;
   },
