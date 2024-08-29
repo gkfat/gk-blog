@@ -40,7 +40,7 @@ description: 前面理解了 OAuth 2.0 標準以及授權碼的運作流程，�
 
 再看一次 Authorization Code 授權碼流程：
 
-![oauth authorization code flow]('./oauth-2/oauth-authorization-code-flow.png')
+![oauth authorization code flow](./oauth-2/oauth-authorization-code-flow.png)
 
 我們發現脆弱的部份在於步驟 (3) 與 (4) 之間，Auth Server 無法確定這是來自同一個客戶端的請求。
 
