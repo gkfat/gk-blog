@@ -46,6 +46,23 @@ OAuth 定義了四個角色：
 5. 應用程式向資源伺服器（API）請求資源，並提供訪問令牌進行身分驗證
 6. 如果訪問令牌有效，則資源伺服器（API）提供資源
 
+流程如下：
+
+```mermaid
+sequenceDiagram
+    Client ->>+ Api Server: 請求授權
+    Api Server ->>+ User: 請給予授權
+    User ->>+ Api Server: 同意
+    Api Server ->>+ Client: 同意授權，給予授權碼
+    Client ->>+ Api Server: 這是授權碼，請求 access_token
+    Api Server ->>+ Api Server: 驗證授權碼
+    Api Server ->>+ Client: 驗證通過，給予 access_token
+    Client ->>+ Api Server: 這是 access_token，請求存取資源
+    Api Server ->>+ Api Server: 驗證 access_token
+    Api Server ->>+ Resource Server: 驗證通過，存取資源
+    Api Server ->>+ Client: 回覆存取資源結果
+```
+
 這是基本思路，實際上流程會隨著不同情境而有不同應用。
 
 通常應用程式 Client 會需要向服務註冊，並帶著 Client ID 與 Client Secret 向服務表明自己的合法性。

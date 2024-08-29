@@ -1,14 +1,15 @@
 import {
-  defineConfig,
-  HeadConfig,
+    defineConfig,
+    HeadConfig,
 } from 'vitepress';
+import { withMermaid } from 'vitepress-plugin-mermaid';
 
 import { mindItems } from '../mind/sidebar.mts';
 import { programmingItems } from '../programming/sidebar.mts';
 
 const baseUrl = 'https://gk-blog.pages.dev/';
 
-export default defineConfig({
+const siteConfig = defineConfig({
   title: "GK's 技術筆記",
   transformHead: ({ pageData }) => {
     const head: HeadConfig[] = [
@@ -159,3 +160,5 @@ export default defineConfig({
     ],
   },
 });
+
+export default withMermaid(siteConfig);
