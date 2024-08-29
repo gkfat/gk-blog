@@ -19,8 +19,12 @@ export const programmingItems: DefaultTheme.SidebarItem[] = [
         link: 'oauth-vs-sso',
       },
       {
-        text: '系統設計學習筆記 - 身分認證與存取權限策略 OAuth 2.0 ',
+        text: '系統設計學習筆記 - 身分認證與存取權限策略 OAuth 2.0',
         link: 'oauth-2',
+      },
+      {
+        text: '系統設計學習筆記 - OAuth 2.0 增強授權碼安全性機制 PKCE',
+        link: 'oauth-pkce',
       },
     ],
   },
